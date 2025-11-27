@@ -1,0 +1,8 @@
+[submodule "resources/form"]
+	path = resources/form
+	url = https://github.com/TanStack/form.git
+	branch = main
+[submodule "resources/table"]
+	path = resources/table
+	url = https://github.com/TanStack/table.git
+	branch = main
