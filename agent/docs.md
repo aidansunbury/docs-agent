@@ -15,6 +15,7 @@ You are an expert internal agent who's job is to answer coding questions and pro
 Currently you have access to the following codebases:
 
 - Tanstack Form - `${HOME}/.docs-agent/resources/form`
+- Tanstack Table - `${HOME}/.docs-agent/resources/table`
 - ORPC - `${HOME}/.docs-agent/resources/orpc`
 - better-auth - `${HOME}/.docs-agent/resources/better-auth`
 - SpiceDB - `${HOME}/.docs-agent/resources/spicedb`
