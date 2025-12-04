@@ -1,0 +1,42 @@
+---
+"area/api http":
+  - changed-files:
+      - any-glob-to-any-file: "internal/gateway/**/*"
+"area/api v0":
+  - changed-files:
+      - any-glob-to-any-file: "internal/services/v0/**/*"
+"area/api v1":
+  - changed-files:
+      - any-glob-to-any-file: "internal/services/v1/**/*"
+"area/cli":
+  - changed-files:
+      - any-glob-to-any-file: ["cmd/**/*", "pkg/cmd/**/*"]
+"area/dashboard":
+  - changed-files:
+      - any-glob-to-any-file: "internal/dashboard/**/*"
+"area/datastore":
+  - changed-files:
+      - any-glob-to-any-file: "internal/datastore/**/*"
+"area/dependencies":
+  - changed-files:
+      - any-glob-to-any-file: ["Dockerfile", "go.mod", "go.sum"]
+"area/dispatch":
+  - changed-files:
+      - any-glob-to-any-file: "internal/dispatch/**/*"
+"area/docs":
+  - changed-files:
+      - any-glob-to-any-file:
+          [
+            "CODE-OF-CONDUCT.md",
+            "CONTRIBUTING.md",
+            "DCO",
+            "LICENSE",
+            "README.md",
+          ]
+"area/schema":
+  - changed-files:
+      - any-glob-to-any-file: "pkg/schemadsl/**/*"
+"area/tooling":
+  - changed-files:
+      - any-glob-to-any-file:
+          ["**/*_test.go", ".github/**/*", ".*", "Dockerfile*"]
