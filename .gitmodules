@@ -6,3 +6,11 @@
 	path = resources/table
 	url = https://github.com/TanStack/table.git
 	branch = main
+[submodule "resources/orpc"]
+	path = resources/orpc
+	url = https://github.com/unnoq/orpc.git
+	branch = main
+[submodule "resources/better-auth"]
+	path = resources/better-auth
+	url = https://github.com/better-auth/better-auth.git
+	branch = canary
