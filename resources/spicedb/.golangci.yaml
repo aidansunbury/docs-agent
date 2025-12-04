@@ -1,0 +1,128 @@
+---
+version: "2"
+run:
+  allow-parallel-runners: true
+  build-tags:
+    - "ci"
+    - "datastoreconsistency"
+    - "docker"
+    - "image"
+    - "mage"
+    - "!skipintegrationtests"
+    - "steelthread"
+    - "pgbouncer"
+    - "postgres"
+#    - wasm
+linters:
+  enable:
+    - "bidichk"
+    - "bodyclose"
+    - "depguard"
+    - "errcheck"
+    - "errname"
+    - "errorlint"
+    - "gocritic"
+    - "goprintffuncname"
+    - "gosec"
+    - "govet"
+    - "importas"
+    - "ineffassign"
+    - "makezero"
+    - "perfsprint"
+    - "prealloc"
+    - "predeclared"
+    - "promlinter"
+    - "revive"
+    - "rowserrcheck"
+    - "spancheck"
+    - "staticcheck"
+    - "tagalign"
+    # - "testifylint" TODO: fix issues
+    - "tparallel"
+    - "unconvert"
+    - "usetesting"
+    - "wastedassign"
+    - "whitespace"
+    - "unused"
+  settings:
+    depguard:
+      rules:
+        main:
+          deny:
+            - pkg: "k8s.io/utils/strings/slices$"
+              desc: "use github.com/samber/lo"
+    staticcheck:
+      checks:
+        - "all"
+    revive:
+      rules:
+        - name: "unused-parameter"
+          disabled: true
+    rowserrcheck:
+      packages:
+        - "github.com/jackc/pgx/v5"
+  exclusions:
+    generated: "lax"
+    presets:
+      - "comments"
+      - "common-false-positives"
+      - "legacy"
+      - "std-error-handling"
+    rules:
+      - linters:
+          - "errcheck"
+        text: "tx.Rollback()"
+      - linters:
+          - "staticcheck"
+        path: "internal/services/"
+        text: "SA1019"
+      - linters:
+          - "staticcheck"
+        path: "internal/middleware/consistency/"
+        text: "SA1019"
+      - linters:
+          - "staticcheck"
+        path: "pkg/proto/core/v1/core.pb.validate.manual.go"
+        text: "ST1003"
+      - linters:
+          - "revive"
+        path: "pkg/proto/core/v1/core.pb.validate.manual.go"
+        text: "var-naming"
+      - linters:
+          - "revive"
+        text: 'receiver-naming: receiver name \S+ should be consistent with previous receiver name \S+ for invalid-type'
+      - linters:
+          - "perfsprint"
+        path: '(.+)_test\.go'
+    paths:
+      - "third_party$"
+      - "builtin$"
+      - "examples$"
+formatters:
+  enable:
+    - "gci"
+    - "gofmt"
+    - "gofumpt"
+    - "goimports"
+  settings:
+    gofmt:
+      rewrite-rules:
+        - pattern: "interface{}"
+          replacement: "any"
+        - pattern: "a[b:len(a)]"
+          replacement: "a[b:]"
+    gci:
+      sections:
+        - "standard"
+        - "default"
+        - "prefix(github.com/authzed)"
+        - "localmodule"
+    goimports:
+      local-prefixes:
+        - "github.com/authzed/spicedb"
+  exclusions:
+    generated: "lax"
+    paths:
+      - "third_party$"
+      - "builtin$"
+      - "examples$"

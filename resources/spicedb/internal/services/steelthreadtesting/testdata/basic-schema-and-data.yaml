@@ -1,0 +1,20 @@
+---
+schema: |+
+  definition user {}
+  definition user2 {}
+
+  definition group {
+    relation direct_member: user | group#member
+    relation admin: user
+    permission member = direct_member + admin
+  }
+
+  definition document {
+    relation editor: user2:*
+    relation viewer: user | user:* | group#member
+    permission view = viewer
+  }
+
+relationships: |
+  document:somedoc#editor@user2:*
+  document:somedoc#viewer@user:user-0

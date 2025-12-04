@@ -1,0 +1,11 @@
+{
+   "enabled": false,
+   "extends":[
+      "config:base",
+      ":app",
+      "group:all"
+   ],
+   "postUpdateOptions":[
+      "gomodTidy"
+   ]
+}

@@ -1,0 +1,12 @@
+dist/
+completions/
+manpages/
+*.wasm
+.vscode/settings.json
+.env.local
+coverage*.txt
+.idea/
+.claude/
+e2e/newenemy/spicedb
+e2e/newenemy/cockroach
+e2e/newenemy/chaosd
