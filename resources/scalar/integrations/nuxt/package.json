@@ -1,0 +1,78 @@
+{
+  "name": "@scalar/nuxt",
+  "description": "Nuxt module to render beautiful, interactive API documentation from OpenAPI/Swagger documents.",
+  "license": "MIT",
+  "author": "Scalar (https://github.com/scalar)",
+  "homepage": "https://github.com/scalar/scalar",
+  "bugs": "https://github.com/scalar/scalar/issues/new/choose",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scalar/scalar.git",
+    "directory": "integrations/nuxt"
+  },
+  "keywords": [
+    "api",
+    "references",
+    "nuxt",
+    "docs",
+    "postman alternative",
+    "rest",
+    "testing",
+    "vue"
+  ],
+  "version": "0.5.72",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "cross-env NUXT_TELEMETRY_DISABLED=false pnpm dev:prepare && nuxt-module-build build",
+    "dev": "pnpm dev:prepare && nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxi prepare && nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "test": "vitest",
+    "test:e2e": "playwright test",
+    "types:check": "NUXT_TELEMETRY_DISABLED=true nuxi typecheck"
+  },
+  "type": "module",
+  "main": "./dist/module.mjs",
+  "types": "./dist/types.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.mts",
+      "import": "./dist/module.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "readme": {
+    "title": "Scalar API Reference Module for Nuxt",
+    "badges": [
+      {
+        "type": "npm-version"
+      },
+      {
+        "type": "npm-downloads"
+      },
+      {
+        "type": "npm-license"
+      }
+    ],
+    "documentation": "https://scalar.com/products/api-references/integrations/nuxt"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^4.0.0",
+    "@scalar/api-client": "workspace:*",
+    "@scalar/api-reference": "workspace:*",
+    "@scalar/types": "workspace:*",
+    "@scalar/use-hooks": "workspace:*",
+    "vue": "catalog:*"
+  },
+  "devDependencies": {
+    "@nuxt/module-builder": "^1.0.1",
+    "@types/node": "catalog:*",
+    "cross-env": "^7.0.3",
+    "nuxt": "^4.1.0",
+    "vitest": "catalog:*"
+  }
+}

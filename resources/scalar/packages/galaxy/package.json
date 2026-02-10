@@ -1,0 +1,62 @@
+{
+  "name": "@scalar/galaxy",
+  "description": "OpenAPI example specification in YAML and JSON",
+  "license": "MIT",
+  "author": "Scalar (https://github.com/scalar)",
+  "homepage": "https://github.com/scalar/scalar",
+  "bugs": "https://github.com/scalar/scalar/issues/new/choose",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scalar/scalar.git",
+    "directory": "packages/galaxy"
+  },
+  "keywords": [
+    "openapi",
+    "example",
+    "swagger",
+    "petstore"
+  ],
+  "version": "0.5.12",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "scalar-build-esbuild",
+    "dev": "pnpx @scalar/cli document serve ./src/documents/3.1.yaml --watch",
+    "dev:live": "cd src/documents && pnpx http-server --cors",
+    "format": "scalar-format",
+    "format:check": "scalar-format-check",
+    "lint:check": "scalar-lint-check",
+    "lint:fix": "scalar-lint-fix",
+    "test": "vitest",
+    "types:build": "scalar-types-build",
+    "types:check": "scalar-types-check"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./3.1.yaml": "./dist/3.1.yaml",
+    "./3.1.json": "./dist/3.1.json",
+    "./latest.yaml": "./dist/latest.yaml",
+    "./latest.json": "./dist/latest.json",
+    "./asyncapi/3.0.yaml": "./dist/asyncapi/3.0.yaml",
+    "./asyncapi/3.0.json": "./dist/asyncapi/3.0.json",
+    "./asyncapi/latest.yaml": "./dist/asyncapi/latest.yaml",
+    "./asyncapi/latest.json": "./dist/asyncapi/latest.json"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "devDependencies": {
+    "@scalar/build-tooling": "workspace:*",
+    "@scalar/openapi-parser": "workspace:*",
+    "vite": "catalog:*"
+  }
+}

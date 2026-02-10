@@ -1,0 +1,556 @@
+import { renderToString } from '@vue/server-renderer'
+import { flushPromises, mount } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { createSSRApp, h } from 'vue'
+
+import ApiReference from '@/components/ApiReference.vue'
+
+vi.mock(import('@scalar/use-hooks/useBreakpoints'), (importOriginal) => ({
+  ...importOriginal(),
+  useBreakpoints: () => ({
+    mediaQueries: {
+      lg: { value: true },
+    },
+  }),
+}))
+
+beforeEach(() => {
+  vi.resetAllMocks()
+  vi.unstubAllGlobals()
+
+  // Mock window.location for all tests
+  vi.stubGlobal('location', {
+    href: 'http://localhost:3000/',
+    origin: 'http://localhost:3000',
+    protocol: 'http:',
+    host: 'localhost:3000',
+    hostname: 'localhost',
+    port: '3000',
+    pathname: '/',
+    search: '',
+    hash: '',
+    ancestorOrigins: {} as DOMStringList,
+    assign: vi.fn(),
+    reload: vi.fn(),
+    replace: vi.fn(),
+    toString: () => 'http://localhost:3000/',
+  })
+})
+
+describe('multiple configurations', () => {
+  it('renders a single API reference', async () => {
+    const wrapper = mount(ApiReference, {
+      props: {
+        configuration: {
+          content: {
+            openapi: '3.1.0',
+            info: {
+              title: 'My API',
+              version: '1.0.0',
+            },
+            paths: {
+              '/api/v1/users': {
+                get: {
+                  summary: 'Get users',
+                },
+              },
+            },
+          },
+        },
+      },
+    })
+
+    // Wait for the API reference to be rendered
+    await wrapper.vm.$nextTick()
+
+    // Check whether it renders the Content component only once
+    expect(wrapper.findAllComponents({ name: 'Content' })).toHaveLength(1)
+    wrapper.unmount()
+  })
+
+  it(`doesn't render the select when there is only one configuration`, async () => {
+    const wrapper = mount(ApiReference, {
+      props: {
+        configuration: [
+          {
+            content: {
+              openapi: '3.1.0',
+              info: {
+                title: 'My API',
+                version: '1.0.0',
+              },
+            },
+          },
+        ],
+      },
+    })
+
+    // Wait for the API reference to be rendered
+    await wrapper.vm.$nextTick()
+
+    // Check whether it renders the Content component
+    expect(wrapper.findAllComponents({ name: 'Content' })).toHaveLength(1)
+    const documentSelector = wrapper.findComponent({ name: 'DocumentSelector' })
+
+    // Check whether it doesn't render the select
+    expect(documentSelector.exists()).toBe(false)
+    wrapper.unmount()
+  })
+
+  it('renders a select when multiple configurations are provided', async () => {
+    const wrapper = mount(ApiReference, {
+      props: {
+        configuration: [
+          {
+            content: {
+              openapi: '3.1.0',
+              info: {
+                title: 'My API #1',
+                version: '1.0.0',
+              },
+            },
+          },
+          {
+            content: {
+              openapi: '3.1.0',
+              info: {
+                title: 'My API #2',
+                version: '1.0.0',
+              },
+            },
+          },
+        ],
+      },
+    })
+
+    // Wait for the API reference to be rendered
+    await wrapper.vm.$nextTick()
+
+    // Check whether it renders the Content component
+    expect(wrapper.findAllComponents({ name: 'Content' })).toHaveLength(1)
+    const documentSelector = wrapper.findComponent({ name: 'DocumentSelector' })
+
+    // Ensure the select is rendered
+    expect(documentSelector.html()).not.toBe('<!--v-if-->')
+    wrapper.unmount()
+  })
+
+  it('renders a select with the names', async () => {
+    const wrapper = mount(ApiReference, {
+      props: {
+        configuration: [
+          {
+            slug: 'my-api-1',
+            content: {
+              openapi: '3.1.0',
+              info: {
+                title: 'My API #1',
+                version: '1.0.0',
+              },
+            },
+          },
+          {
+            slug: 'my-api-2',
+            content: {
+              openapi: '3.1.0',
+              info: {
+                title: 'My API #2',
+                version: '1.0.0',
+              },
+            },
+          },
+        ],
+      },
+    })
+
+    // Wait for the API reference to be rendered
+    await flushPromises()
+    await wrapper.vm.$nextTick()
+
+    // Check whether it renders the Content component
+    expect(wrapper.findAllComponents({ name: 'Content' })).toHaveLength(1)
+
+    // Check whether it renders the select
+    const documentSelector = wrapper.findComponent({ name: 'DocumentSelector' })
+    expect(documentSelector.exists()).toBe(true)
+
+    // Check whether it renders the names
+    expect(documentSelector.html()).toContain('my-api-1')
+    await documentSelector.vm.$emit('update:modelValue', 'my-api-2')
+    await wrapper.vm.$nextTick()
+    expect(documentSelector.html()).toContain('my-api-2')
+    wrapper.unmount()
+  })
+
+  it('should fire `onDocumentSelect` when changing document', async () => {
+    const onDocumentSelect = vi.fn()
+
+    const wrapper = mount(ApiReference, {
+      props: {
+        configuration: {
+          onDocumentSelect,
+
+          sources: [
+            {
+              slug: 'my-api-1',
+              content: {
+                openapi: '3.1.0',
+                info: {
+                  title: 'My API #1',
+                  version: '1.0.0',
+                },
+              },
+            },
+            {
+              slug: 'my-api-2',
+              content: {
+                openapi: '3.1.0',
+                info: {
+                  title: 'My API #2',
+                  version: '1.0.0',
+                },
+              },
+            },
+          ],
+        },
+      },
+    })
+
+    // Wait for the API reference to be rendered
+    await wrapper.vm.$nextTick()
+
+    // onDocumentSelect should be called after API reference is loaded
+    expect(onDocumentSelect).toHaveBeenCalledOnce()
+
+    // Check whether it renders the Content component
+    expect(wrapper.findAllComponents({ name: 'Content' })).toHaveLength(1)
+
+    const documentSelector = wrapper.findComponent({ name: 'DocumentSelector' })
+
+    // Ensure the select is rendered
+    expect(documentSelector.exists()).toBe(true)
+
+    await documentSelector.vm.$emit('update:modelValue', 'my-api-2')
+    await wrapper.vm.$nextTick()
+
+    // onDocumentSelect should be called after choosing another document
+    expect(onDocumentSelect).toHaveBeenCalledTimes(2)
+
+    wrapper.unmount()
+  })
+
+  it('should fire `onDocumentSelect` then `onLoaded`', async () => {
+    const onDocumentSelect = vi.fn()
+    const onLoaded = vi.fn()
+
+    const wrapper = mount(ApiReference, {
+      props: {
+        configuration: {
+          onDocumentSelect,
+          onLoaded,
+
+          sources: [
+            {
+              slug: 'my-api-1',
+              content: {
+                openapi: '3.1.0',
+                info: {
+                  title: 'My API #1',
+                  version: '1.0.0',
+                },
+              },
+            },
+            {
+              slug: 'my-api-2',
+              content: {
+                openapi: '3.1.0',
+                info: {
+                  title: 'My API #2',
+                  version: '1.0.0',
+                },
+              },
+            },
+          ],
+        },
+      },
+    })
+
+    // Wait for the API reference to be rendered
+    await wrapper.vm.$nextTick()
+
+    // onDocumentSelect should be called after API reference is loaded
+    expect(onDocumentSelect).toHaveBeenCalledOnce()
+
+    // onLoaded should not have been called yet
+    expect(onLoaded).not.toHaveBeenCalled()
+
+    // resolve document load promises
+    await flushPromises()
+
+    // now onLoaded should have been called
+    expect(onLoaded).toHaveBeenCalledOnce()
+
+    // Check whether it renders the Content component
+    expect(wrapper.findAllComponents({ name: 'Content' })).toHaveLength(1)
+
+    const documentSelector = wrapper.findComponent({ name: 'DocumentSelector' })
+
+    // Reset mocks
+    onDocumentSelect.mockClear()
+    onLoaded.mockClear()
+
+    // Ensure the select is rendered
+    expect(documentSelector.exists()).toBe(true)
+
+    await documentSelector.vm.$emit('update:modelValue', 'my-api-2')
+    await wrapper.vm.$nextTick()
+
+    // onDocumentSelect should be called after choosing another document
+    expect(onDocumentSelect).toHaveBeenCalledOnce()
+    expect(onLoaded).not.toHaveBeenCalledOnce()
+
+    // resolve promises loading the document
+    await flushPromises()
+
+    // now onLoaded should have been called
+    expect(onLoaded).toHaveBeenCalledOnce()
+
+    wrapper.unmount()
+  })
+})
+
+describe('circular documents', () => {
+  it('handles circular references in schemas gracefully', async () => {
+    const wrapper = mount(ApiReference, {
+      props: {
+        configuration: {
+          content: {
+            openapi: '3.0.1',
+            info: {
+              title: 'API with Circular Dependencies',
+              version: '1.0.0',
+            },
+            components: {
+              schemas: {
+                Base: {
+                  required: ['Type'],
+                  type: 'object',
+                  anyOf: [{ $ref: '#/components/schemas/Derived1' }, { $ref: '#/components/schemas/Derived2' }],
+                  discriminator: {
+                    propertyName: 'Type',
+                    mapping: {
+                      'Value1': '#/components/schemas/Derived1',
+                      'Value2': '#/components/schemas/Derived2',
+                    },
+                  },
+                },
+                Derived1: {
+                  properties: {
+                    Type: {
+                      enum: ['Value1'],
+                      type: 'string',
+                    },
+                  },
+                },
+                Derived2: {
+                  required: ['Ref'],
+                  properties: {
+                    Type: {
+                      enum: ['Value2'],
+                      type: 'string',
+                    },
+                    Ref: {
+                      $ref: '#/components/schemas/Base',
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    })
+
+    // Wait for the API reference to be rendered
+    // await flushPromises()
+    await wrapper.vm.$nextTick()
+
+    // Check whether it renders the Content component
+    expect(wrapper.findAllComponents({ name: 'Content' })).toHaveLength(1)
+
+    // Verify the component doesn't crash or throw errors when processing circular references
+    expect(wrapper.exists()).toBe(true)
+
+    // Check that the component is still functional despite circular dependencies
+    const Content = wrapper.findComponent({ name: 'Content' })
+    expect(Content.exists()).toBe(true)
+
+    wrapper.unmount()
+  })
+})
+
+describe('multiple sources', () => {
+  it('renders two URLs', async () => {
+    const wrapper = mount(ApiReference, {
+      props: {
+        configuration: {
+          sources: [
+            {
+              url: 'https://api.example.com/v1/openapi.yaml',
+              slug: 'my-api-1',
+              default: true,
+            },
+            {
+              url: 'https://api.example.com/v2/openapi.yaml',
+              slug: 'my-api-2',
+            },
+          ],
+        },
+      },
+    })
+
+    // Wait for the API reference to be rendered
+    await flushPromises()
+    await wrapper.vm.$nextTick()
+
+    // Check whether it renders the select
+    const documentSelector = wrapper.findComponent({ name: 'DocumentSelector' })
+    expect(documentSelector.exists()).toBe(true)
+    await documentSelector.find('button').trigger('click')
+
+    // Check whether it renders the names
+    expect(documentSelector.text()).toContain('my-api-2')
+    await documentSelector.vm.$emit('update:modelValue', 'my-api-1')
+    await wrapper.vm.$nextTick()
+    expect(documentSelector.text()).toContain('my-api-1')
+    wrapper.unmount()
+  })
+})
+
+describe('Rendering', () => {
+  it('has the title in the HTML output', async () => {
+    const document = {
+      openapi: '3.1.0',
+      info: {
+        title: 'Test API',
+        version: '1.0.0',
+      },
+      paths: {},
+    }
+
+    const app = createSSRApp({
+      render: () =>
+        h(ApiReference, {
+          configuration: {
+            content: document,
+          },
+        }),
+    })
+
+    const html = await renderToString(app)
+
+    expect(html).toContain('Test API')
+  })
+})
+
+describe('proxy configuration', () => {
+  it('uses the proxy to load the document when proxyUrl is configured', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      text: async () =>
+        JSON.stringify({
+          openapi: '3.1.0',
+          info: {
+            title: 'Test API',
+            version: '1.0.0',
+          },
+          paths: {},
+        }),
+      json: async () => ({
+        openapi: '3.1.0',
+        info: {
+          title: 'Test API',
+          version: '1.0.0',
+        },
+        paths: {},
+      }),
+    })
+
+    vi.stubGlobal('fetch', mockFetch)
+
+    const wrapper = mount(ApiReference, {
+      props: {
+        configuration: {
+          sources: [
+            {
+              url: 'https://api.example.com/v1/openapi.yaml',
+              slug: 'my-api',
+              default: true,
+            },
+          ],
+          proxyUrl: 'https://custom-proxy.example.com',
+        },
+      },
+    })
+
+    await flushPromises()
+    await wrapper.vm.$nextTick()
+    await flushPromises()
+
+    // Verify that fetch was called with the proxied URL
+    expect(mockFetch).toHaveBeenCalledWith(
+      'https://custom-proxy.example.com/?scalar_url=https%3A%2F%2Fapi.example.com%2Fv1%2Fopenapi.yaml',
+      expect.any(Object),
+    )
+
+    wrapper.unmount()
+  })
+
+  it('does not use the proxy when custom fetch is provided', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      text: async () =>
+        JSON.stringify({
+          openapi: '3.1.0',
+          info: {
+            title: 'Test API',
+            version: '1.0.0',
+          },
+          paths: {},
+        }),
+      json: async () => ({
+        openapi: '3.1.0',
+        info: {
+          title: 'Test API',
+          version: '1.0.0',
+        },
+        paths: {},
+      }),
+    })
+
+    vi.stubGlobal('fetch', mockFetch)
+
+    const wrapper = mount(ApiReference, {
+      props: {
+        configuration: {
+          sources: [
+            {
+              url: 'https://api.example.com/v1/openapi.yaml',
+              slug: 'my-api',
+              default: true,
+            },
+          ],
+        },
+      },
+    })
+
+    await flushPromises()
+    await wrapper.vm.$nextTick()
+    await flushPromises()
+
+    // Verify that fetch was called without the proxied URL
+    expect(mockFetch).toHaveBeenCalledWith('https://api.example.com/v1/openapi.yaml', expect.any(Object))
+
+    wrapper.unmount()
+  })
+})

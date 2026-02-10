@@ -1,0 +1,47 @@
+{
+  "name": "@scalar-examples/web",
+  "license": "MIT",
+  "author": "Scalar (https://github.com/scalar)",
+  "homepage": "https://github.com/scalar/scalar",
+  "bugs": "https://github.com/scalar/scalar/issues/new/choose",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scalar/scalar.git",
+    "directory": "examples/web"
+  },
+  "version": "0.4.2",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "vue-tsc && vite build",
+    "dev": "vite",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint .  --fix",
+    "preview": "vite preview",
+    "types:check": "vue-tsc --noEmit --skipLibCheck --composite false"
+  },
+  "type": "module",
+  "dependencies": {
+    "@scalar/api-reference": "workspace:*",
+    "@scalar/components": "workspace:*",
+    "@scalar/galaxy": "workspace:*",
+    "@scalar/themes": "workspace:*",
+    "@scalar/types": "workspace:*",
+    "@scalar/use-hooks": "workspace:*",
+    "@scalar/workspace-store": "workspace:*",
+    "@vueuse/core": "catalog:*",
+    "monaco-editor": "^0.47.0",
+    "vue": "catalog:*",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:*",
+    "autoprefixer": "^10.4.19",
+    "eslint-plugin-vue": "^9.31.0",
+    "postcss": "catalog:*",
+    "postcss-nested": "^6.0.1",
+    "vite": "catalog:*"
+  }
+}

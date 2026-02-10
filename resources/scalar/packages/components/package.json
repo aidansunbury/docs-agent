@@ -1,0 +1,89 @@
+{
+  "name": "@scalar/components",
+  "description": "Scalars component library",
+  "license": "MIT",
+  "author": "Scalar (https://github.com/scalar)",
+  "homepage": "https://github.com/scalar/scalar",
+  "bugs": "https://github.com/scalar/scalar/issues/new/choose",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scalar/scalar.git",
+    "directory": "packages/components"
+  },
+  "version": "0.18.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm typegen:icons && scalar-build-vite",
+    "build:storybook": "storybook build",
+    "clean:snapshots": "shx rm -rf \"**/snapshots\"",
+    "dev": "storybook dev -p 5100 --ci",
+    "format": "scalar-format",
+    "format:check": "scalar-format-check",
+    "lint:check": "scalar-lint-check && pnpm lint:icons",
+    "lint:fix": "scalar-lint-fix",
+    "lint:icons": "svglint src/components/ScalarIcon/icons/*.svg --config src/components/ScalarIcon/.svglintrc.js",
+    "preview": "vite preview --outDir storybook-static -c test/vite.config.ts 1>&2",
+    "test": "vitest",
+    "test:e2e": "PW_TEST_CONNECT_WS_ENDPOINT=ws://127.0.0.1:5001/ playwright test",
+    "test:e2e:ci": "CI=1 playwright test",
+    "test:e2e:update": "pnpm test:e2e --update-snapshots",
+    "typegen:icons": "vite-node ./src/scripts/typegen.ts",
+    "types:build": "scalar-types-build-vue",
+    "types:check": "scalar-types-check-vue"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@floating-ui/utils": "catalog:*",
+    "@floating-ui/vue": "catalog:*",
+    "@headlessui/vue": "catalog:*",
+    "@scalar/code-highlight": "workspace:*",
+    "@scalar/helpers": "workspace:*",
+    "@scalar/icons": "workspace:*",
+    "@scalar/oas-utils": "workspace:*",
+    "@scalar/themes": "workspace:*",
+    "@scalar/use-hooks": "workspace:*",
+    "@vueuse/core": "catalog:*",
+    "cva": "1.0.0-beta.4",
+    "nanoid": "catalog:*",
+    "pretty-bytes": "catalog:*",
+    "radix-vue": "^1.9.17",
+    "vue": "catalog:*",
+    "vue-component-type-helpers": "^3.2.2"
+  },
+  "devDependencies": {
+    "@headlessui/tailwindcss": "catalog:*",
+    "@playwright/test": "catalog:*",
+    "@scalar/build-tooling": "workspace:*",
+    "@storybook/addon-docs": "10.1.11",
+    "@storybook/addon-links": "10.1.11",
+    "@storybook/vue3-vite": "10.1.11",
+    "@tailwindcss/vite": "catalog:*",
+    "@types/jsdom": "catalog:*",
+    "@types/node": "catalog:*",
+    "@vitejs/plugin-vue": "catalog:*",
+    "@vue/test-utils": "catalog:*",
+    "@vueless/storybook-dark-mode": "^10.0.6",
+    "jsdom": "catalog:*",
+    "storybook": "10.1.11",
+    "svglint": "^4.1.2",
+    "tailwindcss": "catalog:*",
+    "vite": "catalog:*",
+    "vite-svg-loader": "catalog:*",
+    "vitest": "catalog:*"
+  }
+}

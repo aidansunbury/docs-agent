@@ -1,0 +1,442 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":dependencyDashboardApproval", "helpers:pinGitHubActionDigests"],
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+  "labels": ["dependencies"],
+  "semanticCommits": "enabled",
+  "rangeStrategy": "bump",
+  "vulnerabilityAlerts": {
+    "rangeStrategy": "bump",
+    "assignees": ["@hanspagel"]
+  },
+  "recreateWhen": "never",
+  "packageRules": [
+    {
+      "description": "Keep this in sync with package.json minimumReleaseAge",
+      "matchDatasources": ["npm"],
+      "minimumReleaseAge": "7 days"
+    },
+
+    {
+      "description": "Group minor and patch dependencies",
+      "matchUpdateTypes": ["patch", "minor"],
+      "matchPackageNames": ["*"],
+      "groupName": "minor patch dependencies"
+    },
+
+    {
+      "description": "Update commit prefix for separate scope",
+      "matchFileNames": [
+        "packages/**",
+        "package.json",
+        "pnpm-workspace.yaml",
+        "integrations/**",
+        "examples/**",
+        "projects/**",
+        "tooling/**"
+      ],
+      "semanticCommits": "enabled",
+      "semanticCommitScope": "{{{additionalBranchPrefix}}}",
+      "semanticCommitType": "chore"
+    },
+
+    {
+      "description": "Packages - API Client",
+      "matchFileNames": ["packages/api-client/**"],
+      "additionalBranchPrefix": "api-client"
+    },
+    {
+      "description": "Packages - API Client React",
+      "matchFileNames": ["packages/api-client-react/**"],
+      "additionalBranchPrefix": "api-client-react"
+    },
+    {
+      "description": "Packages - API Reference",
+      "matchFileNames": ["packages/api-reference/**"],
+      "additionalBranchPrefix": "api-reference"
+    },
+    {
+      "description": "Packages - API Reference React",
+      "matchFileNames": ["packages/api-reference-react/**"],
+      "additionalBranchPrefix": "api-reference-react"
+    },
+    {
+      "description": "Packages - Build Tooling",
+      "matchFileNames": ["packages/build-tooling/**"],
+      "additionalBranchPrefix": "build-tooling"
+    },
+    {
+      "description": "Packages - Code Highlight",
+      "matchFileNames": ["packages/code-highlight/**"],
+      "additionalBranchPrefix": "code-highlight"
+    },
+    {
+      "description": "Packages - Components",
+      "matchFileNames": ["packages/components/**"],
+      "additionalBranchPrefix": "components"
+    },
+    {
+      "description": "Packages - Config",
+      "matchFileNames": ["packages/config/**"],
+      "additionalBranchPrefix": "config"
+    },
+    {
+      "description": "Packages - Core",
+      "matchFileNames": ["packages/core/**"],
+      "additionalBranchPrefix": "core"
+    },
+    {
+      "description": "Packages - Draggable",
+      "matchFileNames": ["packages/draggable/**"],
+      "additionalBranchPrefix": "draggable"
+    },
+    {
+      "description": "Packages - Galaxy",
+      "matchFileNames": ["packages/galaxy/**"],
+      "additionalBranchPrefix": "galaxy"
+    },
+    {
+      "description": "Packages - Helpers",
+      "matchFileNames": ["packages/helpers/**"],
+      "additionalBranchPrefix": "helpers"
+    },
+    {
+      "description": "Packages - Icons",
+      "matchFileNames": ["packages/icons/**"],
+      "additionalBranchPrefix": "icons"
+    },
+    {
+      "description": "Packages - Import",
+      "matchFileNames": ["packages/import/**"],
+      "additionalBranchPrefix": "import"
+    },
+    {
+      "description": "Packages - JSON Diff",
+      "matchFileNames": ["packages/json-diff/**"],
+      "additionalBranchPrefix": "json-diff"
+    },
+    {
+      "description": "Packages - Mock Server",
+      "matchFileNames": ["packages/mock-server/**"],
+      "additionalBranchPrefix": "mock-server"
+    },
+    {
+      "description": "Packages - NextJS OpenAPI",
+      "matchFileNames": ["packages/nextjs-openapi/**"],
+      "additionalBranchPrefix": "nextjs-openapi"
+    },
+    {
+      "description": "Packages - OAS Utils",
+      "matchFileNames": ["packages/oas-utils/**"],
+      "additionalBranchPrefix": "oas-utils"
+    },
+    {
+      "description": "Packages - Object Utils",
+      "matchFileNames": ["packages/object-utils/**"],
+      "additionalBranchPrefix": "object-utils"
+    },
+    {
+      "description": "Packages - OpenAPI Parser",
+      "matchFileNames": ["packages/openapi-parser/**"],
+      "additionalBranchPrefix": "openapi-parser"
+    },
+    {
+      "description": "Packages - OpenAPI to Markdown",
+      "matchFileNames": ["packages/openapi-to-markdown/**"],
+      "additionalBranchPrefix": "openapi-to-markdown"
+    },
+    {
+      "description": "Packages - OpenAPI Types",
+      "matchFileNames": ["packages/openapi-types/**"],
+      "additionalBranchPrefix": "openapi-types"
+    },
+    {
+      "description": "Packages - Postman to OpenAPI",
+      "matchFileNames": ["packages/postman-to-openapi/**"],
+      "additionalBranchPrefix": "postman-to-openapi"
+    },
+    {
+      "description": "Packages - React Renderer",
+      "matchFileNames": ["packages/react-renderer/**"],
+      "additionalBranchPrefix": "react-renderer"
+    },
+    {
+      "description": "Packages - Scripts",
+      "matchFileNames": ["packages/scripts/**"],
+      "additionalBranchPrefix": "scripts"
+    },
+    {
+      "description": "Packages - Snippetz",
+      "matchFileNames": ["packages/snippetz/**"],
+      "additionalBranchPrefix": "snippetz"
+    },
+    {
+      "description": "Packages - Themes",
+      "matchFileNames": ["packages/themes/**"],
+      "additionalBranchPrefix": "themes"
+    },
+    {
+      "description": "Packages - TypeScript to OpenAPI",
+      "matchFileNames": ["packages/ts-to-openapi/**"],
+      "additionalBranchPrefix": "ts-to-openapi"
+    },
+    {
+      "description": "Packages - Types",
+      "matchFileNames": ["packages/types/**"],
+      "additionalBranchPrefix": "types"
+    },
+    {
+      "description": "Packages - Use CodeMirror",
+      "matchFileNames": ["packages/use-codemirror/**"],
+      "additionalBranchPrefix": "use-codemirror"
+    },
+    {
+      "description": "Packages - Use Hooks",
+      "matchFileNames": ["packages/use-hooks/**"],
+      "additionalBranchPrefix": "use-hooks"
+    },
+    {
+      "description": "Packages - Use Toasts",
+      "matchFileNames": ["packages/use-toasts/**"],
+      "additionalBranchPrefix": "use-toasts"
+    },
+    {
+      "description": "Packages - Void Server",
+      "matchFileNames": ["packages/void-server/**"],
+      "additionalBranchPrefix": "void-server"
+    },
+    {
+      "description": "Packages - Workspace Store",
+      "matchFileNames": ["packages/workspace-store/**"],
+      "additionalBranchPrefix": "workspace-store"
+    },
+    {
+      "description": "Packages - Analytics Client",
+      "matchFileNames": ["packages/analytics-client/**"],
+      "additionalBranchPrefix": "analytics-client"
+    },
+    {
+      "description": "Packages - OpenAPI Upgrader",
+      "matchFileNames": ["packages/openapi-upgrader/**"],
+      "additionalBranchPrefix": "openapi-upgrader"
+    },
+    {
+      "description": "Packages - Pre Post Request Scripts",
+      "matchFileNames": ["packages/pre-post-request-scripts/**"],
+      "additionalBranchPrefix": "pre-post-request-scripts"
+    },
+    {
+      "description": "Packages - Sidebar",
+      "matchFileNames": ["packages/sidebar/**"],
+      "additionalBranchPrefix": "sidebar"
+    },
+    {
+      "description": "Packages - Use Tooltip",
+      "matchFileNames": ["packages/use-tooltip/**"],
+      "additionalBranchPrefix": "use-tooltip"
+    },
+
+    {
+      "description": "Workspace Dependencies",
+      "matchFileNames": ["pnpm-workspace.yaml"],
+      "additionalBranchPrefix": "workspace"
+    },
+
+    {
+      "description": "Root Dependencies",
+      "matchFileNames": ["package.json"],
+      "additionalBranchPrefix": "root"
+    },
+
+    {
+      "description": "Tooling",
+      "matchFileNames": ["tooling/**"],
+      "additionalBranchPrefix": "tooling"
+    },
+
+    {
+      "description": "Integrations - .NET",
+      "matchFileNames": ["integrations/dotnet/**"],
+      "additionalBranchPrefix": "dotnet"
+    },
+    {
+      "description": "Integrations - Django Ninja",
+      "matchFileNames": ["integrations/django-ninja/**"],
+      "additionalBranchPrefix": "django-ninja"
+    },
+    {
+      "description": "Integrations - Docker",
+      "matchFileNames": ["integrations/docker/**"],
+      "additionalBranchPrefix": "docker"
+    },
+    {
+      "description": "Integrations - Docusaurus",
+      "matchFileNames": ["integrations/docusaurus/**"],
+      "additionalBranchPrefix": "docusaurus"
+    },
+    {
+      "description": "Integrations - FastAPI",
+      "matchFileNames": ["integrations/fastapi/**"],
+      "additionalBranchPrefix": "fastapi"
+    },
+    {
+      "description": "Integrations - Fastify",
+      "matchFileNames": ["integrations/fastify/**"],
+      "additionalBranchPrefix": "fastify"
+    },
+    {
+      "description": "Integrations - Hono",
+      "matchFileNames": ["integrations/hono/**"],
+      "additionalBranchPrefix": "hono"
+    },
+    {
+      "description": "Integrations - Java",
+      "matchFileNames": ["integrations/java/**"],
+      "additionalBranchPrefix": "java"
+    },
+    {
+      "description": "Integrations - NestJS",
+      "matchFileNames": ["integrations/nestjs/**", "examples/nestjs/**"],
+      "additionalBranchPrefix": "nestjs"
+    },
+    {
+      "description": "Integrations - Next.js",
+      "matchFileNames": ["integrations/nextjs/**", "examples/nextjs-api-reference/**"],
+      "additionalBranchPrefix": "nextjs"
+    },
+    {
+      "description": "Integrations - Nuxt",
+      "matchFileNames": ["integrations/nuxt/**", "examples/nuxt/**"],
+      "additionalBranchPrefix": "nuxt"
+    },
+    {
+      "description": "Integrations - Rust",
+      "matchFileNames": ["integrations/rust/**"],
+      "additionalBranchPrefix": "rust"
+    },
+    {
+      "description": "Integrations - SvelteKit",
+      "matchFileNames": ["integrations/sveltekit/**", "examples/sveltekit/**"],
+      "additionalBranchPrefix": "sveltekit"
+    },
+    {
+      "description": "Integrations - Astro",
+      "matchFileNames": ["integrations/astro/**"],
+      "additionalBranchPrefix": "astro"
+    },
+
+    {
+      "description": "Projects - Client Scalar.com",
+      "matchFileNames": ["projects/client-scalar-com/**"],
+      "additionalBranchPrefix": "client-scalar-com"
+    },
+    {
+      "description": "Projects - Proxy Scalar.com",
+      "matchFileNames": ["projects/proxy-scalar-com/**"],
+      "additionalBranchPrefix": "proxy-scalar-com"
+    },
+    {
+      "description": "Projects - Scalar App",
+      "matchFileNames": ["projects/scalar-app/**"],
+      "additionalBranchPrefix": "scalar-app"
+    },
+
+    {
+      "description": "Scripts",
+      "matchFileNames": ["tooling/scripts/**"],
+      "additionalBranchPrefix": "tooling-scripts"
+    },
+
+    {
+      "description": "Examples - React",
+      "matchFileNames": ["examples/react/**", "examples/react-webpack/**"],
+      "additionalBranchPrefix": "react-example"
+    },
+    {
+      "description": "Examples - SSG",
+      "matchFileNames": ["examples/ssg/**"],
+      "additionalBranchPrefix": "ssg-example"
+    },
+    {
+      "description": "Examples - Web",
+      "matchFileNames": ["examples/web/**"],
+      "additionalBranchPrefix": "web-example"
+    },
+
+    {
+      "description": "Do not group GitHub actions",
+      "matchDepTypes": ["action"],
+      "groupName": null
+    },
+
+    {
+      "description": "Group official patch and minor updates for official GitHub actions",
+      "matchDepTypes": ["action"],
+      "matchPackageNames": ["actions/**"],
+      "matchUpdateTypes": ["patch", "minor", "digest"],
+      "groupName": "official-github-actions"
+    },
+
+    {
+      "description": "Disable engine updates like node, github runner, and uses-with",
+      "matchDepTypes": ["engines", "github-runner", "uses-with"],
+      "enabled": false
+    },
+
+    {
+      "description": "Keep these packages as low as possible for best compatibility",
+      "matchFileNames": ["**/Scalar.AspNetCore.*.csproj"],
+      "matchPackageNames": ["Microsoft.AspNetCore.OpenApi", "Swashbuckle.AspNetCore.SwaggerGen"],
+      "enabled": false
+    },
+
+    {
+      "description": "Disable patch updates for Aspire.Hosting for best compatibility",
+      "matchFileNames": ["**/Scalar.Aspire.csproj"],
+      "matchPackageNames": ["Aspire.Hosting"],
+      "matchUpdateTypes": ["patch"],
+      "enabled": false
+    },
+
+    {
+      "description": "Allow unstable updates for Aspire.Hosting.Docker and Aspire.Hosting.Keycloak since no stable packages exist yet",
+      "matchPackageNames": ["Aspire.Hosting.Docker", "Aspire.Hosting.Keycloak"],
+      "ignoreUnstable": false
+    },
+
+    {
+      "description": "Disable any docker updates for .NET Aspire",
+      "matchFileNames": ["**/aspire/**"],
+      "matchDatasources": ["docker"],
+      "enabled": false
+    },
+
+    {
+      "description": "Disable .NET SDK updates",
+      "matchFileNames": ["**/global.json"],
+      "enabled": false
+    },
+
+    {
+      "description": "Disable major updates for Microsoft.AspNetCore packages",
+      "matchPackageNames": ["Microsoft.AspNetCore**"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+
+    {
+      "description": "Keep Spring Boot dependencies as low as possible for best compatibility",
+      "matchFileNames": ["integrations/java/**"],
+      "matchPackageNames": ["org.springframework.boot:*"],
+      "enabled": false
+    },
+
+    {
+      "description": "Disable updates for node docker images. We update images manually.",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["node**"],
+      "enabled": false
+    }
+  ]
+}

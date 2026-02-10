@@ -1,0 +1,30 @@
+node_modules/
+dist/
+.history/
+.env
+.next
+.turbo
+*.tgz
+*.tsbuildinfo
+__pycache__/
+.output
+.nuxt
+.scalar/
+# Testing data
+test-*.json
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+playwright-results.json
+
+# Temporary Vite/Vitest config files
+*.config.ts.timestamp-*.mjs
+rollup.config-*.mjs
+
+.DS_Store
+
+.svelte-kit
+.astro
+
+.pnpm-store/

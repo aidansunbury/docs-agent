@@ -1,0 +1,1203 @@
+<script setup lang="ts">
+import { provideUseId } from '@headlessui/vue'
+import { OpenApiClientButton } from '@scalar/api-client/components'
+import {
+  createApiClientModal,
+  type ApiClientModal,
+} from '@scalar/api-client/v2/features/modal'
+import { getActiveEnvironment } from '@scalar/api-client/v2/helpers'
+import {
+  addScalarClassesToHeadless,
+  ScalarColorModeToggleButton,
+  ScalarColorModeToggleIcon,
+  ScalarSidebarFooter,
+} from '@scalar/components'
+import { redirectToProxy } from '@scalar/helpers/url/redirect-to-proxy'
+import { createSidebarState, ScalarSidebar } from '@scalar/sidebar'
+import { getThemeStyles, hasObtrusiveScrollbars } from '@scalar/themes'
+import {
+  apiReferenceConfigurationSchema,
+  type AnyApiReferenceConfiguration,
+  type ApiReferenceConfiguration,
+  type ApiReferenceConfigurationRaw,
+} from '@scalar/types/api-reference'
+import { useBreakpoints } from '@scalar/use-hooks/useBreakpoints'
+import { useClipboard } from '@scalar/use-hooks/useClipboard'
+import { useColorMode } from '@scalar/use-hooks/useColorMode'
+import { ScalarToasts } from '@scalar/use-toasts'
+import { createWorkspaceStore } from '@scalar/workspace-store/client'
+import { createWorkspaceEventBus } from '@scalar/workspace-store/events'
+import type {
+  TraversedEntry,
+  TraversedTag,
+} from '@scalar/workspace-store/schemas/navigation'
+import diff from 'microdiff'
+import {
+  computed,
+  onBeforeMount,
+  onBeforeUnmount,
+  onMounted,
+  onServerPrefetch,
+  provide,
+  ref,
+  useId,
+  useTemplateRef,
+  watch,
+} from 'vue'
+
+import { AgentScalarButton, AgentScalarDrawer } from '@/components/AgentScalar'
+import { AGENT_CONTEXT_SYMBOL, useAgent } from '@/hooks/use-agent'
+
+import '@scalar/agent-chat/style.css'
+
+import { isLocalUrl } from '@scalar/helpers/url/is-local-url'
+import { useScrollLock } from '@vueuse/core'
+
+import ClassicHeader from '@/components/ClassicHeader.vue'
+import Content from '@/components/Content/Content.vue'
+import MobileHeader from '@/components/MobileHeader.vue'
+import DocumentSelector from '@/features/multiple-documents/DocumentSelector.vue'
+import SearchButton from '@/features/Search/components/SearchButton.vue'
+import ApiReferenceToolbar from '@/features/toolbar/ApiReferenceToolbar.vue'
+import { getSystemModePreference } from '@/helpers/color-mode'
+import { downloadDocument } from '@/helpers/download'
+import { getIdFromUrl, makeUrlFromId } from '@/helpers/id-routing'
+import {
+  scrollToLazy as _scrollToLazy,
+  blockIntersection,
+  intersectionEnabled,
+} from '@/helpers/lazy-bus'
+import {
+  loadAuthFromStorage,
+  loadClientFromStorage,
+} from '@/helpers/load-from-perssistance'
+import { mapConfigPlugins } from '@/helpers/map-config-plugins'
+import { mapConfigToWorkspaceStore } from '@/helpers/map-config-to-workspace-store'
+import {
+  normalizeConfigurations,
+  type NormalizedConfiguration,
+} from '@/helpers/normalize-configurations'
+import { useIntersection } from '@/hooks/use-intersection'
+import { createPluginManager, PLUGIN_MANAGER_SYMBOL } from '@/plugins'
+import { persistencePlugin } from '@/plugins/persistance-plugin'
+
+const props = defineProps<{
+  /**
+   * Configuration for the API reference.
+   * Can be a single configuration or an array of configurations for multiple documents.
+   */
+  configuration?: AnyApiReferenceConfiguration
+}>()
+
+defineSlots<{
+  'content-start'?(): { breadcrumb: string }
+  'content-end'?(): { breadcrumb: string }
+  'sidebar-start'?(): { breadcrumb: string }
+  'sidebar-end'?(): { breadcrumb: string }
+  'editor-placeholder'?(): { breadcrumb: string }
+  footer?(): { breadcrumb: string }
+}>()
+
+const { mediaQueries } = useBreakpoints()
+const { copyToClipboard } = useClipboard()
+
+/**
+ * Used to inject the environment into built packages
+ *
+ * Primary use case is the open-in-client button
+ */
+const isDevelopment = import.meta.env.DEV
+
+const obtrusiveScrollbars = computed(hasObtrusiveScrollbars)
+
+const eventBus = createWorkspaceEventBus({ debug: isDevelopment })
+const isSidebarOpen = ref(false)
+
+watch(
+  () => mediaQueries?.lg?.value,
+  (newValue, oldValue) => {
+    // Close the drawer when we go from desktop to mobile
+    if (oldValue && !newValue) {
+      isSidebarOpen.value = false
+    }
+  },
+)
+
+/**
+ * Due to a bug in headless UI, we need to set an ID here that can be shared across server/client
+ * TODO remove this once the bug is fixed
+ *
+ * @see https://github.com/tailwindlabs/headlessui/issues/2979
+ */
+provideUseId(() => useId())
+
+// ---------------------------------------------------------------------------
+/**
+ * Configuration Handling
+ *
+ * We will normalize the configurations and store them in a computed property.
+ * The active configuration will be associated with the active document.
+ */
+const configList = computed(() => normalizeConfigurations(props.configuration))
+
+const isMultiDocument = computed(() => Object.keys(configList.value).length > 1)
+
+/** Search for the source with a default attribute or use the first one */
+const activeSlug = ref<string>(
+  Object.values(configList.value).find((c) => c.default)?.slug ??
+    configList.value[Object.keys(configList.value)?.[0] ?? '']?.slug ??
+    '',
+)
+
+/**
+ * On initial page load we need to determine if there is a valid document slug in the URL
+ *
+ * If there is we set the active slug to the document slug
+ */
+if (typeof window !== 'undefined') {
+  const url = new URL(window.location.href)
+
+  // To handle legacy query parameter multi-document support we redirect
+  // to the new path routing format
+  const apiParam = url.searchParams.get('api')
+  if (apiParam && configList.value[apiParam]) {
+    activeSlug.value = apiParam
+    const idFromUrl = getIdFromUrl(
+      url,
+      configList.value[apiParam].config.pathRouting?.basePath,
+      apiParam,
+    )
+    const newUrl = makeUrlFromId(
+      idFromUrl,
+      configList.value[apiParam].config.pathRouting?.basePath,
+      isMultiDocument.value,
+    )
+    if (newUrl) {
+      newUrl.searchParams.delete('api')
+      window.history.replaceState({}, '', newUrl.toString())
+    }
+  }
+
+  /**
+   * For path routing on initial load we do not know which basePath to check for
+   * we need to search the configs to see if any of the base paths match the URL
+   * and then use that basePath to get the initial id
+   *
+   * With this approach we cannot support multi-document mode with one of configs having
+   * an empty basePath
+   *
+   * Other conflicts are possible.
+   */
+  const basePaths = Object.values(configList.value).map(
+    (c) => c.config.pathRouting?.basePath,
+  )
+
+  const initialId = getIdFromUrl(
+    url,
+    basePaths.find(
+      (p) => p && url.pathname.startsWith(p.startsWith('/') ? p : `/${p}`),
+    ),
+    isMultiDocument.value ? undefined : activeSlug.value,
+  )
+  const documentSlug = initialId.split('/')[0]
+
+  if (documentSlug && configList.value[documentSlug]) {
+    activeSlug.value = documentSlug
+  }
+}
+
+/** Computed document options list for the selector logic */
+const documentOptionList = computed(() =>
+  Object.values(configList.value).map((c) => ({
+    label: c.title,
+    id: c.slug,
+  })),
+)
+
+/** Configuration overrides to apply to the selected document (from the localhost toolbar) */
+const configurationOverrides = ref<
+  Partial<Omit<ApiReferenceConfiguration, 'slug' | 'title' | ''>>
+>({})
+
+/** Any dev toolbar modifications are merged with the active configuration */
+const mergedConfig = computed<ApiReferenceConfigurationRaw>(() => ({
+  // Provides a default set of values when the lookup fails
+  ...apiReferenceConfigurationSchema.parse({}),
+  // The active configuration based on the slug
+  ...configList.value[activeSlug.value]?.config,
+  // Any overrides from the localhost toolbar
+  ...configurationOverrides.value,
+}))
+
+/** Convenience break out var to determine which routing mode we are using */
+const basePath = computed(() => mergedConfig.value.pathRouting?.basePath)
+
+const themeStyle = computed(() =>
+  getThemeStyles(mergedConfig.value.theme, {
+    fonts: mergedConfig.value.withDefaultFonts,
+  }),
+)
+
+/** Plugin injection is not reactive. All plugins must be provided at first render */
+provide(
+  PLUGIN_MANAGER_SYMBOL,
+  createPluginManager({
+    plugins: Object.values(configList.value).flatMap(
+      (c) => c.config.plugins ?? [],
+    ),
+  }),
+)
+// ---------------------------------------------------------------------------
+/** Navigation State Handling */
+
+// Front-end redirect
+if (mergedConfig.value.redirect && typeof window !== 'undefined') {
+  const newPath = mergedConfig.value.redirect(
+    (mergedConfig.value.pathRouting ? window.location.pathname : '') +
+      window.location.hash,
+  )
+  if (newPath) {
+    window.history.replaceState({}, '', newPath)
+  }
+}
+
+/**
+ * Sets the active slug and updates the URL with the selected document slug
+ *
+ * If an element ID is passed in we will configure the path or hash routing
+ */
+function syncSlugAndUrlWithDocument(
+  slug: string,
+  elementId: string | undefined,
+  config: ApiReferenceConfigurationRaw,
+) {
+  // We create a new URL and go to the root element if an ID is not provided
+  const url = makeUrlFromId(
+    elementId || slug,
+    config.pathRouting?.basePath,
+    isMultiDocument.value,
+  )
+
+  if (url) {
+    window.history.replaceState({}, '', url.toString())
+  }
+
+  // Update the active slug
+  activeSlug.value = slug
+}
+
+// ---------------------------------------------------------------------------
+/** Workspace Store Initialization */
+
+/**
+ * Initializes the new client workspace store.
+ */
+const workspaceStore = createWorkspaceStore({
+  plugins: [
+    persistencePlugin({
+      prefix: () => activeSlug.value,
+      persistAuth: () => mergedConfig.value.persistAuth ?? false,
+    }),
+  ],
+})
+
+// TODO: persistence should be hoisted into standalone
+// Client side integrations will want to handle dark mode externally
+const { toggleColorMode, isDarkMode } = useColorMode({
+  initialColorMode: {
+    true: 'dark' as const,
+    false: 'light' as const,
+    undefined: 'system' as const,
+  }[String(mergedConfig.value.darkMode)],
+  overrideColorMode: mergedConfig.value.forceDarkModeState,
+})
+
+/**
+ * Create top level sidebar entries for each document
+ * This allows sharing a single sidebar state for across the workspace
+ */
+const itemsFromWorkspace = computed<TraversedEntry[]>(() => {
+  return Object.entries(workspaceStore.workspace.documents).map(
+    ([slug, document]) => ({
+      id: slug,
+      type: 'document',
+      description: document.info.description,
+      name: document.info.title ?? slug,
+      title: document.info.title ?? slug,
+      children: document?.['x-scalar-navigation']?.children ?? [],
+    }),
+  )
+})
+
+/** Initialize the sidebar */
+const sidebarState = createSidebarState<TraversedEntry>(itemsFromWorkspace, {
+  hooks: {},
+})
+
+/** Recursively set all children of the given items to open */
+const setChildrenOpen = (items: TraversedEntry[]): void => {
+  items.forEach((item) => {
+    if (item.type === 'tag' || item.type === 'models') {
+      sidebarState.setExpanded(item.id, true)
+    }
+    if ('children' in item && item.children) {
+      setChildrenOpen(item.children)
+    }
+  })
+}
+
+/** We get the sub items for the sidebar based on the configuration/document slug */
+const sidebarItems = computed<TraversedEntry[]>(() => {
+  const config = mergedConfig.value
+
+  if (!config) {
+    return []
+  }
+
+  const docItems =
+    sidebarState.items.value.find(
+      (item): item is TraversedTag => item.id === activeSlug.value,
+    )?.children ?? []
+
+  // When the default open all tags configuration is enabled we open all the children of the document
+  if (config.defaultOpenAllTags) {
+    setChildrenOpen(docItems)
+  }
+
+  // When the expand all model sections configuration is enabled we open all the children of the models tag
+  if (config.expandAllModelSections) {
+    const models = docItems.find(
+      (item): item is TraversedTag => item.type === 'models',
+    )
+    if (models) {
+      sidebarState.setExpanded(models.id, true)
+      models.children?.forEach((child) => {
+        sidebarState.setExpanded(child.id, true)
+      })
+    }
+  }
+
+  return docItems
+})
+
+/** Find the sidebar entry that represents the introduction section */
+const infoSectionId = computed(
+  () =>
+    sidebarItems.value.find(
+      (item) => item.type === 'text' && item.title === 'Introduction',
+    )?.id,
+)
+
+/** User for mobile navigation */
+const breadcrumb = ref('')
+
+const slotProps = computed(() => ({
+  breadcrumb: breadcrumb.value,
+}))
+
+const setBreadcrumb = (id: string) => {
+  const item = sidebarState.getEntryById(id)
+
+  if (!item || item.type === 'document') {
+    breadcrumb.value = ''
+  } else {
+    breadcrumb.value = item.title
+  }
+}
+
+const scrollToLazyElement = (id: string) => {
+  setBreadcrumb(id)
+  sidebarState.setSelected(id)
+  _scrollToLazy(id, sidebarState.setExpanded, sidebarState.getEntryById)
+}
+
+/** Maps some config values to the workspace store to keep it reactive */
+mapConfigToWorkspaceStore({
+  config: () => mergedConfig.value,
+  store: workspaceStore,
+  isDarkMode,
+})
+
+/** Merged environment variables from workspace and document levels */
+const environment = computed(() =>
+  getActiveEnvironment(
+    workspaceStore,
+    workspaceStore.workspace.activeDocument ?? null,
+  ),
+)
+
+if (typeof window !== 'undefined') {
+  // @ts-expect-error - For debugging purposes expose the store
+  window.dataDumpWorkspace = () => workspaceStore
+}
+
+// For testing
+defineExpose({
+  eventBus,
+  workspaceStore,
+  sidebarItems,
+})
+
+// ---------------------------------------------------------------------------
+// Document Management
+
+/**
+ * Handle changing the active document
+ *
+ * 1. If the document has not be loaded to the workspace store we set it to empty and asynchronously load it
+ * 2. If the document has been loaded to the workspace store we just set it to active
+ * 3. If the content from the configuration has changes we need to update the document in the workspace store
+ */
+const changeSelectedDocument = async (
+  slug: string,
+  elementId?: string | undefined,
+) => {
+  const normalized = configList.value[slug]
+
+  if (!normalized) {
+    console.warn(`Document ${slug} not found in configList`)
+    return
+  }
+
+  const config = {
+    ...normalized.config,
+    ...configurationOverrides.value,
+  }
+
+  // Store `onDocumentSelect` result to await its execution later, before calling `onLoaded`
+  const onDocumentSelectPromise = config.onDocumentSelect?.()
+
+  // Set the active slug and update any routing
+  syncSlugAndUrlWithDocument(slug, elementId, config)
+
+  // Update the document on the route as well, the method and path don't matter as we update them before opening
+  apiClient.value?.route({
+    documentSlug: slug,
+    method: 'get',
+    path: '/',
+  })
+
+  const isFirstLoad = !workspaceStore.workspace.documents[slug]
+
+  // If the document is not in the store, we asynchronously load it
+  if (isFirstLoad) {
+    await workspaceStore.addDocument(
+      normalized.source.url
+        ? {
+            name: slug,
+            url: normalized.source.url,
+            fetch: config.fetch,
+          }
+        : {
+            name: slug,
+            document: normalized.source.content ?? {},
+          },
+      config,
+    )
+  }
+
+  // Always set it to active; if the document is null we show a loading state
+  workspaceStore.update('x-scalar-active-document', slug)
+
+  // If the document has persistence enabled we load the auth schemes from storage
+  if (config.persistAuth) {
+    loadAuthFromStorage(workspaceStore, slug)
+  }
+
+  // ensure that `onLoaded` hook doesn't block execution but is executed after `onDocumentSelect`
+  void (async () => {
+    await onDocumentSelectPromise
+    void config.onLoaded?.(slug)
+  })()
+
+  // When loading to a specified element we need to freeze and scroll
+  if (elementId && elementId !== slug) {
+    scrollToLazyElement(elementId)
+  }
+  // If there is no child element of the document specified we expand the first tag
+  else {
+    const firstTag = sidebarItems.value.find((item) => item.type === 'tag')
+    if (firstTag) {
+      sidebarState.setExpanded(firstTag.id, true)
+    }
+  }
+}
+
+/**
+ * TODO:Move this to a dedicated updateDocument function in the future and
+ * away from vue-reactivity based updates
+ */
+watch(
+  () => Object.values(configList.value),
+  async (newConfigList, oldConfigList) => {
+    /**
+     * Handles replacing and updating documents within the workspace store
+     * when we detect configuration changes.
+     */
+    const updateSource = async (
+      updated: NormalizedConfiguration,
+      previous: NormalizedConfiguration | undefined,
+    ) => {
+      /** If we have not loaded the document previously we don't need to handle any updates to store */
+      if (!workspaceStore.workspace.documents[updated.slug]) {
+        return
+      }
+      /** If the URL has changed we fetch and rebase */
+      if (updated.source.url && updated.source.url !== previous?.source.url) {
+        await workspaceStore.addDocument(
+          {
+            name: updated.slug,
+            url: updated.source.url,
+            fetch: updated.config.fetch,
+          },
+          updated.config,
+        )
+
+        return
+      }
+
+      // If the was not a URL change then we require a document to continue
+      if (!updated.source.content) {
+        return
+      }
+
+      /**
+       * We need to deeply check for document changes. Parse documents and then only rebase
+       * if we detect deep changes in the two sources
+       */
+      if (
+        diff(
+          updated.source.content,
+          previous && 'content' in previous.source
+            ? (previous.source.content ?? {})
+            : {},
+        ).length
+      ) {
+        await workspaceStore.addDocument(
+          {
+            name: updated.slug,
+            document: updated.source.content,
+          },
+          updated.config,
+        )
+      }
+    }
+
+    newConfigList.forEach((newConfig, index) =>
+      updateSource(newConfig, oldConfigList[index]),
+    )
+
+    const newSlugs = newConfigList.map((c) => c.slug)
+    const oldSlugs = oldConfigList.map((c) => c.slug)
+
+    // If the slugs have changed, we need to update the active document and the URL query param
+    if (
+      newSlugs.length !== oldSlugs.length ||
+      !newSlugs.every((slug, index) => slug === oldSlugs[index])
+    ) {
+      await changeSelectedDocument(newSlugs[0] ?? '')
+    }
+  },
+  {
+    deep: true,
+  },
+)
+
+/** Preload the first document during SSR */
+onServerPrefetch(() => changeSelectedDocument(activeSlug.value))
+
+/** Load the first document on page load */
+onBeforeMount(async () => {
+  loadClientFromStorage(workspaceStore)
+
+  await changeSelectedDocument(
+    activeSlug.value,
+    getIdFromUrl(
+      window.location.href,
+      configList.value[activeSlug.value]?.config.pathRouting?.basePath,
+      isMultiDocument.value ? undefined : activeSlug.value,
+    ),
+  )
+})
+
+const documentUrl = computed(() => {
+  return configList.value[activeSlug.value]?.source?.url
+})
+
+// --------------------------------------------------------------------------- */
+// Agent Scalar
+
+/**
+ * Determines if Agent Scalar should be enabled based on the configuration and the current URL
+ *
+ * - If the agent is disabled in the configuration, it should not be enabled
+ * - If the current URL is a local URL, it should be enabled
+ * - If the agent key is set, it should be enabled
+ */
+const agent = useAgent({
+  agentEnabled: computed(() => {
+    const currentConfiguration = configList.value[activeSlug.value]
+
+    if (currentConfiguration?.agent?.disabled) {
+      return false
+    }
+
+    if (typeof window !== 'undefined' && isLocalUrl(window.location.href)) {
+      return true
+    }
+
+    return Boolean(configList.value[activeSlug.value]?.agent?.key)
+  }),
+})
+provide(AGENT_CONTEXT_SYMBOL, agent)
+
+// --------------------------------------------------------------------------- */
+// Api Client Modal
+
+// Setup the ApiClient on mount
+const modal = useTemplateRef<HTMLElement>('modal')
+const apiClient = ref<ApiClientModal | null>(null)
+onMounted(() => {
+  if (!modal.value) {
+    return
+  }
+
+  apiClient.value = createApiClientModal({
+    el: modal.value,
+    eventBus,
+    workspaceStore,
+    options: mergedConfig,
+    plugins: mapConfigPlugins(mergedConfig),
+  })
+})
+onBeforeUnmount(() => {
+  apiClient.value?.app.unmount()
+})
+
+// ---------------------------------------------------------------------------
+// Top level event handlers and user specified callbacks
+
+/** Ensure we call the onServerChange callback */
+eventBus.on('server:update:selected', ({ url }) =>
+  mergedConfig.value.onServerChange?.(url),
+)
+
+/** Download the document from the store */
+eventBus.on('ui:download:document', async ({ format }) => {
+  if (format === 'direct') {
+    const url = configList.value[activeSlug.value]?.source?.url
+    if (!url) {
+      console.error(
+        'Direct download is not supported for documents without a URL source',
+      )
+      return
+    }
+    const result = await fetch(
+      redirectToProxy(mergedConfig.value.proxyUrl, url),
+    ).then((r) => r.text())
+
+    downloadDocument(result, activeSlug.value ?? 'openapi')
+    // Will be handled in the ApiReference component. Only valid for integrations that rely on a configuration with a URL.
+    return
+  }
+
+  const document = workspaceStore.exportActiveDocument(format)
+  if (!document) {
+    console.error('No document found to download')
+    return
+  }
+  downloadDocument(document, activeSlug.value ?? 'openapi', format)
+})
+
+// ---------------------------------------------------------------------------
+// Local event and scroll handling
+
+/**
+ * Handler for a direct navigation event such as a sidebar or search click
+ *
+ * Depending on the item type we handle a selection event differently:
+ *
+ * - Tag: If a tag is closed we open it and all its parents and scroll to it
+ *        If a tag is open we just close the tag
+ * - Operation:
+ *        Open all parents and scroll to the operation
+ */
+const handleSelectItem = (id: string, caller?: 'sidebar') => {
+  const item = sidebarState.getEntryById(id)
+
+  if (
+    (item?.type === 'tag' || item?.type === 'models') &&
+    sidebarState.isExpanded(id)
+  ) {
+    // hack until we fix intersection logic
+    const unblock = blockIntersection()
+    sidebarState.setExpanded(id, false)
+    unblock()
+    return
+  }
+
+  /** When in mobile menu we close the menu when we select an item that is not a tag */
+  if (item?.type !== 'tag' && item?.type !== 'models') {
+    isSidebarOpen.value = false
+  }
+
+  scrollToLazyElement(id)
+
+  const url = makeUrlFromId(id, basePath.value, isMultiDocument.value)
+  if (url) {
+    window.history.pushState({}, '', url)
+
+    // Trigger the onSidebarClick callback if the caller is sidebar
+    if (caller === 'sidebar') {
+      mergedConfig.value.onSidebarClick?.(url.toString())
+    }
+  }
+
+  if (agent.showAgent.value) {
+    agent.closeAgent()
+  }
+}
+eventBus.on('select:nav-item', ({ id }) => handleSelectItem(id))
+eventBus.on('scroll-to:nav-item', ({ id }) => handleSelectItem(id))
+eventBus.on('intersecting:nav-item', ({ id }) => {
+  if (!intersectionEnabled.value) {
+    return
+  }
+
+  sidebarState.setSelected(id)
+  setBreadcrumb(id)
+
+  const url = makeUrlFromId(id, basePath.value, isMultiDocument.value)
+  if (url && workspaceStore.workspace.activeDocument) {
+    window.history.replaceState({}, '', url.toString())
+  }
+})
+eventBus.on('toggle:nav-item', ({ id, open }) => {
+  if (open) {
+    mergedConfig.value.onShowMore?.(id)
+  }
+  sidebarState.setExpanded(id, open ?? !sidebarState.isExpanded(id))
+})
+eventBus.on('copy-url:nav-item', ({ id }) => {
+  const url = makeUrlFromId(
+    id,
+    basePath.value,
+    isMultiDocument.value,
+  )?.toString()
+  return url && copyToClipboard(url)
+})
+
+// ---------------------------------------------------------------------------
+// History and scroll restoration
+
+onBeforeMount(() => {
+  window.history.scrollRestoration = 'manual'
+  // Ensure we add our scalar wrapper class to the headless ui root, mounted is too late
+  addScalarClassesToHeadless()
+
+  // When we detect a back button press we scroll to the new id
+  window.addEventListener('popstate', () => {
+    const id = getIdFromUrl(
+      window.location.href,
+      mergedConfig.value.pathRouting?.basePath,
+      isMultiDocument.value ? undefined : activeSlug.value,
+    )
+    if (id) {
+      scrollToLazyElement(id)
+    }
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Document start intersection observer
+
+const documentStartRef = useTemplateRef<HTMLElement>('documentStartRef')
+
+useIntersection(documentStartRef, () => {
+  eventBus.emit('intersecting:nav-item', { id: activeSlug.value })
+})
+
+const colorMode = computed(() => {
+  const mode = workspaceStore.workspace['x-scalar-color-mode']
+
+  if (mode === 'system') {
+    return getSystemModePreference()
+  }
+
+  return mode
+})
+
+const bodyScrollLocked = useScrollLock(document.body)
+
+watch(agent.showAgent, () => (bodyScrollLocked.value = agent.showAgent.value))
+</script>
+
+<template>
+  <!-- SingleApiReference -->
+  <div>
+    <!-- Inject any custom CSS directly into a style tag -->
+    <component :is="'style'">
+      {{ mergedConfig.customCss }}
+      {{ themeStyle }}
+    </component>
+    <div
+      ref="documentEl"
+      class="scalar-app scalar-api-reference references-layout"
+      :class="[
+        {
+          'scalar-api-references-standalone-mobile': mergedConfig.showSidebar,
+          'scalar-scrollbars-obtrusive': obtrusiveScrollbars,
+          'references-editable': mergedConfig.isEditable,
+          'references-sidebar': mergedConfig.showSidebar,
+          'references-sidebar-mobile-open': isSidebarOpen,
+          'references-classic': mergedConfig.layout === 'classic',
+        },
+        $attrs.class,
+      ]">
+      <!-- Agent Scalar -->
+      <AgentScalarDrawer
+        v-if="agent.agentEnabled.value"
+        :agentScalarConfiguration="configList[activeSlug]?.agent"
+        :eventBus
+        :workspaceStore />
+
+      <!-- Mobile Header and Sidebar when in modern layout -->
+
+      <MobileHeader
+        v-if="mergedConfig.layout === 'modern'"
+        :breadcrumb="breadcrumb"
+        :isSidebarOpen="isSidebarOpen"
+        :showSidebar="mergedConfig.showSidebar"
+        @toggleSidebar="() => (isSidebarOpen = !isSidebarOpen)">
+        <template #search>
+          <SearchButton
+            v-if="!mergedConfig.hideSearch"
+            class="my-2"
+            :document="workspaceStore.workspace.activeDocument"
+            :eventBus="eventBus"
+            :hideModels="mergedConfig.hideModels"
+            :searchHotKey="mergedConfig.searchHotKey"
+            :showSidebar="mergedConfig.showSidebar" />
+        </template>
+        <template #sidebar="{ sidebarClasses }">
+          <ScalarSidebar
+            v-if="mergedConfig.showSidebar && mergedConfig.layout === 'modern'"
+            :aria-label="`Sidebar for ${workspaceStore.workspace.activeDocument?.info?.title}`"
+            class="t-doc__sidebar"
+            :class="sidebarClasses"
+            :isExpanded="sidebarState.isExpanded"
+            :isSelected="sidebarState.isSelected"
+            :items="sidebarItems"
+            layout="reference"
+            :options="mergedConfig"
+            role="navigation"
+            @selectItem="(id) => handleSelectItem(id, 'sidebar')">
+            <template #header>
+              <!-- Wrap in a div when slot is filled -->
+              <DocumentSelector
+                v-if="documentOptionList.length > 1"
+                class="p-3 pb-0"
+                :modelValue="activeSlug"
+                :options="documentOptionList"
+                @update:modelValue="changeSelectedDocument" />
+
+              <!-- Search -->
+              <div
+                v-if="!mergedConfig.hideSearch"
+                class="flex gap-1.5 p-3 pt-1.5">
+                <SearchButton
+                  :document="workspaceStore.workspace.activeDocument"
+                  :eventBus="eventBus"
+                  :hideModels="mergedConfig.hideModels"
+                  :searchHotKey="mergedConfig.searchHotKey" />
+
+                <AgentScalarButton v-if="agent.agentEnabled.value" />
+              </div>
+              <!-- Sidebar Start -->
+              <slot
+                name="sidebar-start"
+                v-bind="slotProps" />
+            </template>
+            <template #footer>
+              <slot
+                name="sidebar-end"
+                v-bind="slotProps">
+                <!-- We default the sidebar footer to the standard scalar elements -->
+                <ScalarSidebarFooter class="darklight-reference">
+                  <OpenApiClientButton
+                    v-if="!mergedConfig.hideClientButton"
+                    buttonSource="sidebar"
+                    :integration="mergedConfig._integration"
+                    :isDevelopment="isDevelopment"
+                    :url="documentUrl" />
+                  <!-- Override the dark mode toggle slot to hide it -->
+                  <template #toggle>
+                    <ScalarColorModeToggleButton
+                      v-if="
+                        !mergedConfig.hideDarkModeToggle &&
+                        !mergedConfig.forceDarkModeState
+                      "
+                      :modelValue="colorMode === 'dark'"
+                      @update:modelValue="() => toggleColorMode()" />
+                    <span v-else />
+                  </template>
+                </ScalarSidebarFooter>
+              </slot>
+            </template>
+          </ScalarSidebar>
+        </template>
+      </MobileHeader>
+
+      <!-- Primary Content -->
+      <main
+        :aria-label="`Open API Documentation for ${workspaceStore.workspace.activeDocument?.info?.title}`"
+        class="references-rendered">
+        <Content
+          :authStore="workspaceStore.auth"
+          :document="workspaceStore.workspace.activeDocument"
+          :environment
+          :eventBus
+          :expandedItems="sidebarState.expandedItems.value"
+          :headingSlugGenerator="
+            mergedConfig.generateHeadingSlug ??
+            ((heading) => `${activeSlug}/description/${heading.slug}`)
+          "
+          :infoSectionId="infoSectionId ?? 'description/introduction'"
+          :items="sidebarItems"
+          :options="mergedConfig"
+          :xScalarDefaultClient="
+            workspaceStore.workspace['x-scalar-default-client']
+          ">
+          <template #start>
+            <ApiReferenceToolbar
+              v-if="
+                workspaceStore.workspace.activeDocument && mediaQueries.lg.value
+              "
+              v-model:overrides="configurationOverrides"
+              :configuration="mergedConfig"
+              :workspace="workspaceStore" />
+
+            <!-- Placeholder intersection observer that emits an empty string to clear the hash when scrolled to the top -->
+            <div ref="documentStartRef" />
+
+            <ClassicHeader v-if="mergedConfig.layout === 'classic'">
+              <div class="w-64 empty:hidden">
+                <DocumentSelector
+                  v-if="documentOptionList.length > 1"
+                  :modelValue="activeSlug"
+                  :options="documentOptionList"
+                  @update:modelValue="changeSelectedDocument" />
+              </div>
+              <SearchButton
+                v-if="!mergedConfig.hideSearch"
+                class="t-doc__sidebar max-w-64"
+                :document="workspaceStore.workspace.activeDocument"
+                :eventBus="eventBus"
+                :hideModels="mergedConfig.hideModels"
+                :searchHotKey="mergedConfig.searchHotKey" />
+              <template #dark-mode-toggle>
+                <ScalarColorModeToggleIcon
+                  v-if="
+                    !mergedConfig.hideDarkModeToggle &&
+                    !mergedConfig.forceDarkModeState
+                  "
+                  class="text-c-2 hover:text-c-1"
+                  :mode="colorMode"
+                  style="transform: scale(1.4)"
+                  variant="icon"
+                  @click="() => toggleColorMode()" />
+              </template>
+            </ClassicHeader>
+            <slot
+              name="content-start"
+              v-bind="slotProps" />
+          </template>
+          <!-- TODO: Remove this; we no longer directly support an inline editor -->
+          <template
+            v-if="mergedConfig.isEditable"
+            #empty-state>
+            <slot
+              name="editor-placeholder"
+              v-bind="slotProps" />
+          </template>
+          <template #end>
+            <slot
+              name="content-end"
+              v-bind="slotProps" />
+          </template>
+        </Content>
+      </main>
+      <!-- Optional Footer -->
+      <div
+        v-if="$slots.footer"
+        class="references-footer">
+        <slot
+          name="footer"
+          v-bind="slotProps" />
+      </div>
+      <!-- Client Modal mount point -->
+      <div ref="modal" />
+    </div>
+    <ScalarToasts />
+  </div>
+</template>
+
+<style>
+@import '@/style.css';
+
+/* Add base styles to the body. Removed browser default margins for a better experience. */
+@layer scalar-base {
+  body {
+    margin: 0;
+    background-color: var(--scalar-background-1);
+  }
+}
+/** Used to check if css is loaded */
+:root {
+  --scalar-loaded-api-reference: true;
+}
+</style>
+<style scoped>
+/* Configurable Layout Variables */
+@layer scalar-config {
+  .scalar-api-reference {
+    /* The header height */
+    --refs-header-height: calc(
+      var(--scalar-custom-header-height, 0px) + var(--scalar-header-height, 0px)
+    );
+    /* The offset of visible references content (minus headers) */
+    --refs-viewport-offset: calc(
+      var(--refs-header-height, 0px) + var(--refs-content-offset, 0px)
+    );
+    /* The calculated height of visible references content (minus headers) */
+    --refs-viewport-height: calc(
+      var(--full-height, 100dvh) - var(--refs-viewport-offset, 0px)
+    );
+    /* The width of the sidebar */
+    --refs-sidebar-width: var(--scalar-sidebar-width, 0px);
+    /* The height of the sidebar */
+    --refs-sidebar-height: calc(
+      var(--full-height, 100dvh) - var(--refs-header-height, 0px)
+    );
+    /* The maximum width of the content column */
+    --refs-content-max-width: var(--scalar-content-max-width, 1540px);
+  }
+
+  .scalar-api-reference.references-classic {
+    /* Classic layout is wider */
+    --refs-content-max-width: var(--scalar-content-max-width, 1420px);
+    min-height: 100dvh;
+    --refs-sidebar-width: 0;
+  }
+}
+.t-doc__sidebar {
+  z-index: 10;
+}
+
+/* ----------------------------------------------------- */
+/* References Layout */
+.references-layout {
+  /* Try to fill the container */
+  min-height: 100dvh;
+  min-width: 100%;
+  max-width: 100%;
+  flex: 1;
+
+  /*
+  Calculated by a resize observer and set in the style attribute
+  Falls back to the viewport height
+  */
+  --full-height: 100dvh;
+
+  /* Grid layout */
+  display: grid;
+  grid-template-rows: var(--scalar-header-height, 0px) repeat(2, auto);
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'header header'
+    'navigation rendered'
+    'footer footer';
+
+  background: var(--scalar-background-1);
+}
+
+.references-editor {
+  grid-area: editor;
+  display: flex;
+  min-width: 0;
+  background: var(--scalar-background-1);
+}
+
+.references-rendered {
+  position: relative;
+  grid-area: rendered;
+  min-width: 0;
+  background: var(--scalar-background-1);
+}
+.scalar-api-reference.references-classic,
+.references-classic .references-rendered {
+  height: initial !important;
+  max-height: initial !important;
+}
+
+@layer scalar-config {
+  .references-sidebar {
+    /* Set a default width if references are enabled */
+    --refs-sidebar-width: var(--scalar-sidebar-width, 288px);
+  }
+}
+
+/* Footer */
+.references-footer {
+  grid-area: footer;
+}
+/* ----------------------------------------------------- */
+/* Responsive / Mobile Layout */
+
+@media (max-width: 1000px) {
+  /* Stack view on mobile */
+  .references-layout {
+    /* Adjust the sidebar height to the viewport height minus the header height */
+    --refs-sidebar-height: calc(
+      var(--full-height, 100dvh) - var(--scalar-custom-header-height, 0px)
+    );
+
+    grid-template-columns: 100%;
+    grid-template-rows: var(--scalar-header-height, 0px) 0px auto auto;
+
+    grid-template-areas:
+      'header'
+      'navigation'
+      'rendered'
+      'footer';
+  }
+  .references-editable {
+    grid-template-areas:
+      'header'
+      'navigation'
+      'editor';
+  }
+
+  .references-rendered {
+    position: static;
+  }
+}
+</style>
+<style scoped>
+/**
+* Sidebar CSS for standalone
+* TODO: @brynn move this to the sidebar block OR the ApiReferenceStandalone component
+* when the new elements are available
+*/
+@media (max-width: 1000px) {
+  .scalar-api-references-standalone-mobile:not(.references-classic) {
+    --scalar-header-height: 50px;
+  }
+}
+</style>
+<style scoped>
+.darklight-reference {
+  width: 100%;
+  margin-top: auto;
+}
+</style>

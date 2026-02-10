@@ -1,0 +1,7 @@
+/coverage
+/test-results
+/test-results-cdn
+/playwright-report
+/playwright-report-cdn
+/test/snapshots-cdn/*.snapshots
+content.json

@@ -1,0 +1,302 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/.venv",
+      "!**/.turbo",
+      "!**/.nuxt",
+      "!**/.vite",
+      "!**/.output",
+      "!**/.vite-ssg-temp",
+      "!**/vite.config.ts.timestamp-*",
+      "!**/package.json",
+      "!**/scalar.config.json",
+      "!**/test-results/**",
+      "!**/build/**",
+      "!**/cdn/**",
+      "!**/cloudbuild.json",
+      "!**/fixtures/**",
+      "!**/node_modules/**",
+      "!**/dist/**",
+      "!**/playwright-report/**",
+      "!**/playwright-results.json",
+      "!**/pnpm-lock.yaml",
+      "!**/.pnpm-store/**",
+      "!**/.docusaurus/**",
+      "!**/examples/nestjs-api-reference-fastify/**",
+      "!**/examples/nestjs-api-reference-express/**",
+      "!**/*/storybook-static/**/*",
+      "!**/.next/**",
+      "!**/.svelte-kit",
+      "!**/obj/**",
+      "!**/bin/**",
+      "!**/packages/openapi-parser/src/schemas/**/*.ts",
+      "!**/packages/openapi-parser/tests/openapi3-examples/**/*.{yml,yaml,json}",
+      "!integrations/**/scalar.js",
+      "!integrations/**/standalone.js",
+      "!**/target/**"
+    ]
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "identifierOrder": "lexicographic",
+            "groups": [":NODE:", ":BLANK_LINE:", ":PACKAGE:", ":BLANK_LINE:", ":ALIAS:", ":BLANK_LINE:", ":PATH:"]
+          }
+        }
+      }
+    }
+  },
+  "formatter": {
+    "formatWithErrors": false,
+    "includes": [
+      "**",
+      "!**/.git",
+      "!**/.svn",
+      "!**/.hg",
+      "!**/.tmp",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/generated",
+      "!**/venv",
+      "!**/.venv",
+      "!**/playwright-report",
+      "!**/.vite-ssg-temp",
+      "!**/pnpm-lock.yaml",
+      "!**/fixtures"
+    ],
+    "enabled": true,
+    "lineEnding": "lf",
+    "indentWidth": 2,
+    "lineWidth": 120,
+    "indentStyle": "space",
+    "attributePosition": "multiline"
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingCommas": "all",
+      "quoteProperties": "preserve",
+      "semicolons": "asNeeded",
+      "arrowParentheses": "always",
+      "bracketSameLine": true
+    }
+  },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": false,
+      "complexity": {
+        "noExtraBooleanCast": "warn",
+        "noUselessCatch": "warn",
+        "noUselessTypeConstraint": "warn",
+        "noForEach": "off",
+        "useFlatMap": "warn",
+        "useArrowFunction": "warn",
+        "useOptionalChain": "warn",
+        "noAdjacentSpacesInRegex": "warn",
+        "noArguments": "warn"
+      },
+      "correctness": {
+        "noConstAssign": "warn",
+        "noConstantCondition": "warn",
+        "noEmptyCharacterClassInRegex": "warn",
+        "noEmptyPattern": "warn",
+        "noGlobalObjectCalls": "warn",
+        "noInnerDeclarations": "warn",
+        "noInvalidBuiltinInstantiation": "warn",
+        "noInvalidConstructorSuper": "warn",
+        "noNonoctalDecimalEscape": "warn",
+        "noPrecisionLoss": "warn",
+        "noSelfAssign": "warn",
+        "noSetterReturn": "warn",
+        "noSwitchDeclarations": "warn",
+        "noUnreachable": "warn",
+        "noUnreachableSuper": "warn",
+        "noUnsafeFinally": "warn",
+        "noUnsafeOptionalChaining": "warn",
+        "noUnusedLabels": "warn",
+        "noUnusedPrivateClassMembers": "warn",
+        "noUnusedVariables": "warn",
+        "useIsNan": "warn",
+        "useValidForDirection": "warn",
+        "useYield": "warn",
+        "noUnusedImports": "warn",
+        "useValidTypeof": "warn"
+      },
+      "style": {
+        "noNamespace": "warn",
+        "noParameterAssign": "warn",
+        "useAsConstAssertion": "warn",
+        "useBlockStatements": "warn",
+        "useForOf": "warn",
+        "useNodejsImportProtocol": "warn",
+        "useNumberNamespace": "warn",
+        "noUselessElse": "warn",
+        "useImportType": "warn",
+        "useExportType": "warn",
+        "noUnusedTemplateLiteral": "warn",
+        "useShorthandFunctionType": "warn",
+        "useConst": "warn",
+        "useArrayLiterals": "warn",
+        "noDescendingSpecificity": "warn"
+      },
+      "suspicious": {
+        "noAsyncPromiseExecutor": "warn",
+        "noCatchAssign": "warn",
+        "noClassAssign": "warn",
+        "noCompareNegZero": "warn",
+        "noControlCharactersInRegex": "warn",
+        "noDebugger": "warn",
+        "noDuplicateCase": "warn",
+        "noDuplicateClassMembers": "warn",
+        "noDuplicateObjectKeys": "warn",
+        "noDuplicateParameters": "warn",
+        "noEmptyBlockStatements": "warn",
+        "noExtraNonNullAssertion": "warn",
+        "noFallthroughSwitchClause": "warn",
+        "noFunctionAssign": "warn",
+        "noGlobalAssign": "warn",
+        "noImportAssign": "warn",
+        "noMisleadingCharacterClass": "warn",
+        "noMisleadingInstantiator": "warn",
+        "noPrototypeBuiltins": "warn",
+        "noRedeclare": "warn",
+        "noShadowRestrictedNames": "warn",
+        "noSparseArray": "warn",
+        "noTsIgnore": "error",
+        "noUnsafeDeclarationMerging": "warn",
+        "noUnsafeNegation": "warn",
+        "useGetterReturn": "warn",
+        "useNamespaceKeyword": "warn",
+        "noDoubleEquals": "warn",
+        "noThenProperty": "warn",
+        "useIsArray": "warn",
+        "noExplicitAny": "off",
+        "noExportsInTest": "error",
+        "noWith": "warn",
+        "noVar": "warn",
+        "useAwait": "error",
+        "useGuardForIn": "warn"
+      },
+      "performance": {
+        "noDelete": "off",
+        "noReExportAll": "warn",
+        "noBarrelFile": "error"
+      },
+      "nursery": {
+        "noFloatingPromises": "warn"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.vue"],
+      "formatter": {
+        "enabled": false
+      },
+      "linter": {
+        "rules": {
+          "style": {
+            "useShorthandFunctionType": "off",
+            "useImportType": "off"
+          },
+          "correctness": {
+            "noUnusedVariables": "off",
+            "noUnusedImports": "off"
+          }
+        }
+      },
+      "assist": {
+        "actions": {
+          "source": {
+            "organizeImports": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/*.tsx"],
+      "javascript": {
+        "jsxRuntime": "reactClassic"
+      }
+    },
+    {
+      "includes": ["packages/*/src/**", "!packages/*/src/**/*.{test,e2e}.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["@test/*", "**/test/**"],
+                    "message": "Do not import test helpers inside source files"
+                  },
+                  {
+                    "group": ["@scalar/types"],
+                    "message": "Import from specific entry points (`/api-reference`, ...)"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["packages/*/src/**/index.{js,ts}", "integrations/*/index.ts", "integrations/*/src/**/index.ts"],
+      "linter": {
+        "rules": {
+          "performance": {
+            "noBarrelFile": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/packages/api-reference/**/*.ts", "**/packages/openapi-parser/**/*.ts"],
+      "linter": {
+        "rules": {
+          "performance": {
+            "noReExportAll": "error"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/*.svelte", "**/*.astro"],
+      "assist": {
+        "actions": {
+          "source": {
+            "organizeImports": "off"
+          }
+        }
+      },
+      "linter": {
+        "rules": {
+          "style": {
+            "useConst": "off",
+            "useImportType": "off"
+          },
+          "correctness": {
+            "noUnusedVariables": "off",
+            "noUnusedImports": "off"
+          }
+        }
+      }
+    }
+  ]
+}

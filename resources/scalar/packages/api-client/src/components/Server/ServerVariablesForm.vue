@@ -1,0 +1,72 @@
+<script setup lang="ts">
+import { useId } from 'vue'
+
+import ServerVariablesSelect from '@/components/Server/ServerVariablesSelect.vue'
+import ServerVariablesTextbox from '@/components/Server/ServerVariablesTextbox.vue'
+import type {
+  ServerVariables,
+  ServerVariableValues,
+} from '@/components/Server/types'
+
+const {
+  values,
+  variables,
+  layout = 'client',
+} = defineProps<{
+  variables?: ServerVariables | undefined
+  values?: ServerVariableValues
+  /** The ID of the input controlled by the variables form */
+  controls?: string
+  /** The layout of the server variables form */
+  layout?: 'client' | 'reference'
+}>()
+
+const emit = defineEmits<{
+  (e: 'update:variable', name: string, value: string): void
+}>()
+
+const id = useId()
+
+function setVariable(name: string, value: string) {
+  emit('update:variable', name, value)
+}
+
+const getVariable = (name: string) => {
+  return (values?.[name] ?? variables?.[name]?.default ?? '').toString()
+}
+</script>
+<template>
+  <template v-if="variables && Object.keys(variables ?? {}).length">
+    <template
+      v-for="name in Object.keys(variables)"
+      :key="name">
+      <div
+        class="group/label flex h-8 w-full"
+        :class="
+          layout === 'reference' &&
+          'items-center border-x border-b last:rounded-b-lg'
+        ">
+        <label
+          class="flex items-center py-2 pl-3 group-has-[input]/label:mr-0 after:content-[':']"
+          :for="`${id}-${name}`">
+          {{ name }}
+        </label>
+        <template v-if="variables?.[name]?.enum?.length">
+          <ServerVariablesSelect
+            :id="`${id}-${name}`"
+            :controls="controls"
+            :enum="variables[name]?.enum?.map((v) => `${v}`) ?? []"
+            :value="getVariable(name)"
+            @change="(s) => setVariable(name, s)" />
+        </template>
+        <template v-else>
+          <ServerVariablesTextbox
+            :id="`${id}-${name}`"
+            :controls="controls"
+            :value="getVariable(name)"
+            @change="(s) => setVariable(name, s)" />
+        </template>
+      </div>
+    </template>
+  </template>
+</template>
