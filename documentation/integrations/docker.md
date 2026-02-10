@@ -1,0 +1,106 @@
+# Scalar API Reference Docker Image
+
+<div class="flex gap-2">
+<a href="https://hub.docker.com/r/scalarapi/api-reference"><img src="https://img.shields.io/docker/v/scalarapi/api-reference?label=Docker%20image"></a>
+<a href="https://hub.docker.com/r/scalarapi/api-reference"><img src="https://img.shields.io/docker/pulls/scalarapi/api-reference?label=Docker%20pulls"></a>
+<a href="https://discord.gg/scalar"><img src="https://img.shields.io/discord/1135330207960678410?style=flat&color=5865F2"></a>
+</div>
+
+## Quick Start
+
+Run the Docker container with your OpenAPI configuration:
+
+```bash
+docker run \
+  -p 8080:8080 \
+  -e API_REFERENCE_CONFIG='{"sources":[{"url": "https://registry.scalar.com/@scalar/apis/galaxy?format=json"}],"theme": "purple"}' \
+  scalarapi/api-reference:latest
+```
+
+Visit `http://localhost:8080` to see your API reference.
+
+## Configuration
+
+The Docker image supports two configuration methods:
+
+### 1. Environment Variable
+
+Set the `API_REFERENCE_CONFIG` environment variable with your Scalar configuration:
+
+```bash
+docker run \
+  -p 8080:8080 \
+  -e API_REFERENCE_CONFIG='{"sources":[{"url":"https://api.example.com/openapi.json"}],"theme":"purple"}' \
+  scalarapi/api-reference:latest
+```
+
+### 2. Document Mounting
+
+Mount OpenAPI documents directly into the container for automatic discovery:
+
+```bash
+docker run \
+  -p 8080:8080 \
+  -v /path/to/your/openapi-docs:/docs \
+  scalarapi/api-reference:latest
+```
+
+The container automatically:
+- Scans for OpenAPI documents (`.json`, `.yaml`, `.yml` files)
+- Serves documents at `/openapi/{filename}`
+- Generates titles from directory structure
+
+**Directory structure example:**
+```
+/docs/
+├── api-v1.json
+├── internal/admin-api.yaml
+└── external/partner-api.json
+```
+
+### 3. Combined Configuration
+
+You can combine both approaches:
+
+```bash
+docker run \
+  -p 8080:8080 \
+  -v /path/to/your/openapi-docs:/docs \
+  -e API_REFERENCE_CONFIG='{"theme": "purple"}' \
+  scalarapi/api-reference:latest
+```
+
+## Docker Compose
+
+```yaml
+services:
+  api-reference:
+    image: scalarapi/api-reference:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      # Mount your OpenAPI documents directory
+      - ./docs:/docs
+    environment:
+      # Optional: Add global configuration like theme
+      # API_REFERENCE_CONFIG: |
+      #   {
+      #     "theme": "purple"
+      #   }
+    restart: unless-stopped
+```
+
+## Environment Variables
+
+| Variable               | Description                                     | Default     |
+| ---------------------- | ----------------------------------------------- | ----------- |
+| `API_REFERENCE_CONFIG` | JSON configuration for the Scalar API Reference | -           |
+| `CDN_URL`              | URL for the API Reference CDN                   | `scalar.js` |
+
+**Note:** Either `API_REFERENCE_CONFIG` must be set OR documents must be mounted to `/docs`
+
+## Health Check
+
+The container includes a health check endpoint at `/health` that returns `OK` with a `200` status code.
+
+For detailed configuration options, refer to the [main Scalar documentation](../configuration.md).

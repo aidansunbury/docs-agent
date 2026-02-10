@@ -1,0 +1,333 @@
+# @scalar/sveltekit
+
+## 0.1.44
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/core@0.3.37**
+
+## 0.1.43
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/core@0.3.36**
+
+## 0.1.42
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/core@0.3.35**
+
+## 0.1.41
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/core@0.3.34**
+
+## 0.1.40
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/core@0.3.33**
+
+## 0.1.39
+
+### Patch Changes
+
+- [#7810](https://github.com/scalar/scalar/pull/7810): docs: update documentation domain
+
+## 0.1.38
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/core@0.3.32**
+
+## 0.1.37
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/core@0.3.31**
+
+## 0.1.36
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/core@0.3.30**
+
+## 0.1.35
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/core@0.3.29**
+
+## 0.1.34
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/core@0.3.28**
+
+## 0.1.33
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @scalar/core@0.3.27
+
+## 0.1.32
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @scalar/core@0.3.26
+
+## 0.1.31
+
+### Patch Changes
+
+- Updated dependencies [[`daa5df4`](https://github.com/scalar/scalar/commit/daa5df45386fa2305275fbf0a7bbcede6bcf9edc)]:
+  - @scalar/core@0.3.25
+
+## 0.1.30
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @scalar/core@0.3.24
+
+## 0.1.29
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @scalar/core@0.3.23
+
+## 0.1.28
+
+### Patch Changes
+
+- Updated dependencies [[`2377b76`](https://github.com/scalar/scalar/commit/2377b76d050f8de70037b17a32d0dd1181d3311d)]:
+  - @scalar/core@0.3.22
+
+## 0.1.27
+
+### Patch Changes
+
+- [#7119](https://github.com/scalar/scalar/pull/7119) [`88a2eb6`](https://github.com/scalar/scalar/commit/88a2eb6a1c33cde2815a01b26612f39c89a1d5e7) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat(sveltekit): make `ScalarApiReference` return a synchronous route handler
+
+- Updated dependencies []:
+  - @scalar/core@0.3.21
+
+## 0.1.26
+
+### Patch Changes
+
+- @scalar/core@0.3.20
+
+## 0.1.25
+
+### Patch Changes
+
+- Updated dependencies [1e01464]
+  - @scalar/core@0.3.19
+
+## 0.1.24
+
+### Patch Changes
+
+- @scalar/core@0.3.18
+
+## 0.1.23
+
+### Patch Changes
+
+- Updated dependencies [fd2c4ba]
+  - @scalar/core@0.3.17
+
+## 0.1.22
+
+### Patch Changes
+
+- @scalar/core@0.3.16
+
+## 0.1.21
+
+### Patch Changes
+
+- @scalar/core@0.3.15
+
+## 0.1.20
+
+### Patch Changes
+
+- @scalar/core@0.3.14
+
+## 0.1.19
+
+### Patch Changes
+
+- Updated dependencies [5f022b5]
+  - @scalar/core@0.3.13
+
+## 0.1.18
+
+### Patch Changes
+
+- Updated dependencies [7dfbe9e]
+  - @scalar/core@0.3.12
+
+## 0.1.17
+
+### Patch Changes
+
+- @scalar/core@0.3.11
+
+## 0.1.16
+
+### Patch Changes
+
+- @scalar/core@0.3.10
+
+## 0.1.15
+
+### Patch Changes
+
+- 44aecdd: feat: set default \_integration to svelte
+  - @scalar/core@0.3.9
+
+## 0.1.14
+
+### Patch Changes
+
+- @scalar/core@0.3.8
+
+## 0.1.13
+
+### Patch Changes
+
+- Updated dependencies [66347d4]
+  - @scalar/core@0.3.7
+
+## 0.1.12
+
+### Patch Changes
+
+- 2d7f995: refactor: use more common straight apostrophe ' instead of the real apostrophe ’
+- Updated dependencies [2d7f995]
+  - @scalar/core@0.3.6
+
+## 0.1.11
+
+### Patch Changes
+
+- @scalar/core@0.3.5
+
+## 0.1.10
+
+### Patch Changes
+
+- @scalar/core@0.3.4
+
+## 0.1.9
+
+### Patch Changes
+
+- 161733e: docs: new README
+
+## 0.1.8
+
+### Patch Changes
+
+- 6ead9cd: chore: remove unused dependencies
+- 4156f1d: Expand workspace store integration
+  - @scalar/core@0.3.3
+
+## 0.1.7
+
+### Patch Changes
+
+- @scalar/core@0.3.2
+- @scalar/types@0.2.2
+
+## 0.1.6
+
+### Patch Changes
+
+- Updated dependencies [4440949]
+  - @scalar/types@0.2.1
+  - @scalar/core@0.3.1
+
+## 0.1.5
+
+### Patch Changes
+
+- Updated dependencies [483ca93]
+  - @scalar/types@0.2.0
+  - @scalar/core@0.3.0
+
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [be8a6ec]
+  - @scalar/types@0.1.16
+  - @scalar/core@0.2.16
+
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [f711ab5]
+- Updated dependencies [0222ad4]
+- Updated dependencies [cb9428c]
+- Updated dependencies [67aa0f4]
+  - @scalar/types@0.1.15
+  - @scalar/core@0.2.15
+
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [8c7bad8]
+  - @scalar/types@0.1.14
+  - @scalar/core@0.2.14
+
+## 0.1.1
+
+### Patch Changes
+
+- e8457cb: Unify themes across scalar. Cleanup interface and remove CJS build.
+- Updated dependencies [e8457cb]
+  - @scalar/types@0.1.13
+  - @scalar/core@0.2.13
+
+## 0.1.0
+
+### Minor Changes
+
+- 62c4ce3: feat: SvelteKit API Reference integration
+
+### Patch Changes
+
+- Updated dependencies [62c4ce3]
+  - @scalar/types@0.1.12
+  - @scalar/core@0.2.12

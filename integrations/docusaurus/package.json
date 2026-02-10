@@ -1,0 +1,86 @@
+{
+  "name": "@scalar/docusaurus",
+  "description": "Docusaurus plugin to embed beautiful, interactive API documentation from OpenAPI/Swagger documents.",
+  "license": "MIT",
+  "author": "Scalar (https://github.com/scalar)",
+  "homepage": "https://github.com/scalar/scalar",
+  "bugs": "https://github.com/scalar/scalar/issues/new/choose",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scalar/scalar.git",
+    "directory": "integrations/docusaurus"
+  },
+  "keywords": [
+    "api",
+    "client",
+    "docusaurus",
+    "postman alternative",
+    "rest",
+    "testing",
+    "react"
+  ],
+  "version": "0.7.36",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "shx rm -Rf ./dist && tsc -p tsconfig.build.json && postcss src/theme.css -o dist/theme.css",
+    "dev": "cd ./playground && docusaurus start --port=5063 --no-open",
+    "format": "scalar-format",
+    "format:check": "scalar-format-check",
+    "lint:check": "scalar-lint-check",
+    "lint:fix": "scalar-lint-fix",
+    "test": "vitest",
+    "types:check": "tsc --noEmit --skipLibCheck"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "readme": {
+    "title": "Scalar API Reference Plugin for Docusaurus",
+    "badges": [
+      {
+        "type": "npm-version"
+      },
+      {
+        "type": "npm-downloads"
+      },
+      {
+        "type": "npm-license"
+      }
+    ],
+    "documentation": "https://scalar.com/products/api-references/integrations/docusaurus",
+    "image": {
+      "url": "https://github.com/scalar/scalar/blob/main/integrations/docusaurus/docusaurus.png?raw=true",
+      "altText": "Screenshot of the Docusaurus integration"
+    }
+  },
+  "dependencies": {
+    "@scalar/types": "workspace:*"
+  },
+  "devDependencies": {
+    "@docusaurus/core": "^3.9.2",
+    "@docusaurus/preset-classic": "^3.9.2",
+    "@docusaurus/tsconfig": "^3.9.2",
+    "@docusaurus/types": "^3.9.2",
+    "@docusaurus/utils": "^3.9.2",
+    "@mdx-js/react": "^3.1.1",
+    "@scalar/build-tooling": "workspace:*",
+    "@types/react": "catalog:*",
+    "@types/react-dom": "catalog:*",
+    "clsx": "^2.1.1",
+    "path": "^0.12.7",
+    "postcss": "catalog:*",
+    "postcss-cli": "^11.0.1",
+    "postcss-nesting": "^12.1.5",
+    "react": "catalog:*",
+    "react-dom": "catalog:*",
+    "vite": "catalog:*"
+  },
+  "peerDependencies": {
+    "@docusaurus/utils": "^3.9.2",
+    "react": "^18.0.0 || ^19.0.0"
+  }
+}

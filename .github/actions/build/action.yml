@@ -1,0 +1,22 @@
+name: 'Build'
+description: 'Build packages using blacksmith runners with persistent turbo cache'
+inputs:
+  node-version:
+    description: 'Node.js version to use (optional, defaults to reading from .nvmrc)'
+    required: false
+  packages:
+    description: 'Package glob pattern to build (e.g., "@scalar/api-reference" or "packages/*")'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node
+      uses: ./.github/actions/setup-node
+      with:
+        node-version: ${{ inputs.node-version }}
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install
+    - name: Build packages
+      shell: bash
+      run: pnpm turbo ${{ env.TURBO_FLAGS }} --filter '${{inputs.packages}}' build

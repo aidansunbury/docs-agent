@@ -1,0 +1,66 @@
+{
+  "name": "@scalar/use-hooks",
+  "description": "Utility hooks for Scalar",
+  "license": "MIT",
+  "author": "Scalar (https://github.com/scalar)",
+  "homepage": "https://github.com/scalar/scalar",
+  "bugs": "https://github.com/scalar/scalar/issues/new/choose",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scalar/scalar.git",
+    "directory": "packages/use-hooks"
+  },
+  "version": "0.3.7",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "scalar-build-esbuild",
+    "lint:check": "scalar-lint-check",
+    "lint:fix": "scalar-lint-fix",
+    "test": "vitest",
+    "types:build": "scalar-types-build-vue",
+    "types:check": "scalar-types-check-vue"
+  },
+  "type": "module",
+  "exports": {
+    "./useBindCx": {
+      "import": "./dist/useBindCx/index.js",
+      "types": "./dist/useBindCx/index.d.ts",
+      "default": "./dist/useBindCx/index.js"
+    },
+    "./useBreakpoints": {
+      "import": "./dist/useBreakpoints/index.js",
+      "types": "./dist/useBreakpoints/index.d.ts",
+      "default": "./dist/useBreakpoints/index.js"
+    },
+    "./useClipboard": {
+      "import": "./dist/useClipboard/index.js",
+      "types": "./dist/useClipboard/index.d.ts",
+      "default": "./dist/useClipboard/index.js"
+    },
+    "./useColorMode": {
+      "import": "./dist/useColorMode/index.js",
+      "types": "./dist/useColorMode/index.d.ts",
+      "default": "./dist/useColorMode/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "dependencies": {
+    "@scalar/use-toasts": "workspace:*",
+    "@vueuse/core": "catalog:*",
+    "cva": "1.0.0-beta.2",
+    "tailwind-merge": "3.4.0",
+    "vue": "catalog:*",
+    "zod": "catalog:*"
+  },
+  "devDependencies": {
+    "@scalar/build-tooling": "workspace:*",
+    "@vue/test-utils": "catalog:*",
+    "jsdom": "catalog:*",
+    "vite": "catalog:*"
+  }
+}

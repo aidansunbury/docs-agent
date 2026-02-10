@@ -1,0 +1,16 @@
+import { build } from '@scalar/build-tooling/esbuild'
+
+await build({
+  platform: 'shared',
+  entries: [
+    'src/bundle/index.ts',
+    'src/magic-proxy/index.ts',
+    'src/diff/index.ts',
+    'src/dereference/index.ts',
+    'src/bundle/plugins/node.ts',
+    'src/bundle/plugins/browser.ts',
+    'src/helpers/escape-json-pointer.ts',
+    'src/helpers/unescape-json-pointer.ts',
+    'src/helpers/get-segments-from-path.ts',
+  ],
+})

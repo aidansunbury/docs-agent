@@ -1,0 +1,130 @@
+import type { ParameterObject } from '@scalar/workspace-store/schemas/v3.1/strict/openapi-document'
+import { mount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
+
+import ParameterList from './ParameterList.vue'
+import ParameterListItem from './ParameterListItem.vue'
+
+describe('ParameterList', () => {
+  const defaultOptions = {
+    collapsableItems: true,
+    withExamples: true,
+    orderRequiredPropertiesFirst: true,
+    orderSchemaPropertiesBy: 'alpha' as const,
+  }
+
+  const createParameter = (name: string, overrides?: Partial<ParameterObject>): ParameterObject => ({
+    name,
+    in: 'query',
+    required: false,
+    schema: { type: 'string' },
+    ...overrides,
+  })
+
+  it('renders parameters without ignore flags', () => {
+    const parameters = [createParameter('param1'), createParameter('param2')]
+
+    const wrapper = mount(ParameterList, {
+      props: {
+        eventBus: null,
+        parameters,
+        options: defaultOptions,
+      },
+      slots: {
+        title: 'Parameters',
+      },
+    })
+
+    const items = wrapper.findAllComponents(ParameterListItem)
+    expect(items).toHaveLength(2)
+  })
+
+  it('renders nothing when parameters array is empty', () => {
+    const wrapper = mount(ParameterList, {
+      props: {
+        parameters: [],
+        options: defaultOptions,
+        eventBus: null,
+      },
+    })
+
+    expect(wrapper.html()).toBe('<!--v-if-->')
+  })
+
+  it('renders the title slot content', () => {
+    const parameters = [createParameter('param1')]
+
+    const wrapper = mount(ParameterList, {
+      props: {
+        parameters,
+        options: defaultOptions,
+        eventBus: null,
+      },
+      slots: {
+        title: 'Query Parameters',
+      },
+    })
+
+    expect(wrapper.text()).toContain('Query Parameters')
+  })
+
+  it('passes breadcrumb prop to ParameterListItem', () => {
+    const parameters = [createParameter('param1')]
+    const breadcrumb = ['root', 'nested']
+
+    const wrapper = mount(ParameterList, {
+      props: {
+        parameters,
+        breadcrumb,
+        options: defaultOptions,
+        eventBus: null,
+      },
+    })
+
+    const item = wrapper.findComponent(ParameterListItem)
+    expect(item.props('breadcrumb')).toEqual(breadcrumb)
+  })
+
+  it('passes options prop to ParameterListItem', () => {
+    const parameters = [createParameter('param1')]
+    const customOptions = {
+      expandAllResponses: false,
+      withExamples: false,
+      orderRequiredPropertiesFirst: false,
+      orderSchemaPropertiesBy: 'preserve' as const,
+    }
+
+    const wrapper = mount(ParameterList, {
+      props: {
+        parameters,
+        options: customOptions,
+        eventBus: null,
+      },
+    })
+
+    const item = wrapper.findComponent(ParameterListItem)
+    expect(item.props('options')).toEqual(customOptions)
+  })
+
+  it('passes parameter data to ParameterListItem', () => {
+    const parameters = [
+      createParameter('testParam', {
+        required: true,
+        description: 'A test parameter',
+        schema: { type: 'number' },
+      }),
+    ]
+
+    const wrapper = mount(ParameterList, {
+      props: {
+        parameters,
+        options: defaultOptions,
+        eventBus: null,
+      },
+    })
+
+    const item = wrapper.findComponent(ParameterListItem)
+    expect(item.props('parameter')).toEqual(parameters[0])
+    expect(item.props('name')).toBe('testParam')
+  })
+})

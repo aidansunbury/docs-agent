@@ -1,0 +1,63 @@
+<script setup lang="ts">
+import {
+  ScalarCard,
+  ScalarCardHeader,
+  ScalarCardSection,
+} from '@scalar/components'
+import type { WorkspaceEventBus } from '@scalar/workspace-store/events'
+import type { TraversedTag } from '@scalar/workspace-store/schemas/navigation'
+import { computed } from 'vue'
+
+import ScreenReader from '@/components/ScreenReader.vue'
+
+import OperationsListItem from './OperationsListItem.vue'
+
+const { tag } = defineProps<{
+  tag: TraversedTag
+  eventBus: WorkspaceEventBus | null
+}>()
+
+const operationsAndWebhooks = computed(() => {
+  return (
+    tag.children?.filter(
+      (child) => child.type === 'operation' || child.type === 'webhook',
+    ) ?? []
+  )
+})
+</script>
+
+<template>
+  <template v-if="tag.children && tag.children?.length > 0">
+    <ScalarCard class="endpoints-card">
+      <ScalarCardHeader muted>
+        <ScreenReader>{{ tag.title }}</ScreenReader>
+        {{ tag.isWebhooks ? 'Webhooks' : 'Operations' }}
+      </ScalarCardHeader>
+      <ScalarCardSection class="custom-scroll max-h-[60vh]">
+        <ul
+          :aria-label="`${tag.title} endpoints`"
+          class="endpoints">
+          <OperationsListItem
+            v-for="operationOrWebhook in operationsAndWebhooks"
+            :key="operationOrWebhook.id"
+            :eventBus="eventBus"
+            :operation="operationOrWebhook" />
+        </ul>
+      </ScalarCardSection>
+    </ScalarCard>
+  </template>
+</template>
+
+<style scoped>
+.endpoints-card {
+  position: sticky;
+  top: calc(var(--refs-viewport-offset) + 24px);
+  font-size: var(--scalar-font-size-3);
+}
+.endpoints {
+  overflow: auto;
+  background: var(--scalar-background-2);
+  padding: 10px 12px;
+  width: 100%;
+}
+</style>

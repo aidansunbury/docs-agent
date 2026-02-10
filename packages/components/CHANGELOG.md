@@ -1,0 +1,2580 @@
+# @scalar/components
+
+## 0.18.0
+
+### Minor Changes
+
+- [#8077](https://github.com/scalar/scalar/pull/8077): feat: support team workspaces
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.37**
+
+## 0.17.6
+
+### Patch Changes
+
+- [#8070](https://github.com/scalar/scalar/pull/8070): chore: remove the import modal and change the workspace picker to support groups
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.36**
+  - [#8037](https://github.com/scalar/scalar/pull/8037): Improve error message when running oas-utils tests while test-servers are not running
+
+## 0.17.5
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.35**
+
+## 0.17.4
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.34**
+
+## 0.17.3
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/helpers@0.2.11**
+  - [#8016](https://github.com/scalar/scalar/pull/8016): feat: move history and auth into their own store
+
+- **@scalar/oas-utils@0.6.33**
+
+## 0.17.2
+
+### Patch Changes
+
+- [#7934](https://github.com/scalar/scalar/pull/7934): fix: z-index issues in addressBar
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.32**
+
+## 0.17.1
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/use-hooks@0.3.7**
+  - [#7977](https://github.com/scalar/scalar/pull/7977): chore(use-hooks): update tailwind merge to v3.4.0
+
+- **@scalar/helpers@0.2.10**
+  - [#7963](https://github.com/scalar/scalar/pull/7963): feat: unify is-object helpers
+
+- **@scalar/oas-utils@0.6.31**
+
+## 0.17.0
+
+### Minor Changes
+
+- [#7959](https://github.com/scalar/scalar/pull/7959): feat(agent): add agent scalar to localhost
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/themes@0.14.0**
+  - [#7959](https://github.com/scalar/scalar/pull/7959): feat(agent): add agent scalar to localhost
+
+- **@scalar/code-highlight@0.2.2**
+
+- **@scalar/oas-utils@0.6.30**
+
+## 0.16.32
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.29**
+
+## 0.16.31
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.28**
+
+## 0.16.30
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.27**
+  - [#7894](https://github.com/scalar/scalar/pull/7894): fix: the import and export of redirect to proxy
+
+- **@scalar/helpers@0.2.9**
+  - [#7894](https://github.com/scalar/scalar/pull/7894): fix: the import and export of redirect to proxy
+
+## 0.16.29
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.26**
+
+## 0.16.28
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.25**
+
+## 0.16.27
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.24**
+
+## 0.16.26
+
+### Patch Changes
+
+- [#7846](https://github.com/scalar/scalar/pull/7846): Fix dev dep issue
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.23**
+
+## 0.16.25
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.22**
+  - [#7814](https://github.com/scalar/scalar/pull/7814): fix: additional properties generate invalid example
+
+## 0.16.24
+
+### Patch Changes
+
+- [#7802](https://github.com/scalar/scalar/pull/7802): fix: Vue warning because of deprecated icon syntax
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.21**
+
+## 0.16.23
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.20**
+
+## 0.16.22
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/helpers@0.2.8**
+  - [#7751](https://github.com/scalar/scalar/pull/7751): fix: auth persistence
+
+- **@scalar/oas-utils@0.6.19**
+
+## 0.16.21
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.18**
+
+## 0.16.20
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.17**
+
+## 0.16.19
+
+### Patch Changes
+
+- [#7725](https://github.com/scalar/scalar/pull/7725): fix(components): support slot for nested items icon
+- [#7693](https://github.com/scalar/scalar/pull/7693): feat: markdown default line height
+
+#### Updated Dependencies
+
+- **@scalar/helpers@0.2.7**
+  - [#7720](https://github.com/scalar/scalar/pull/7720): feat: escape XML in json2xml
+
+- **@scalar/use-hooks@0.3.6**
+  - [#7678](https://github.com/scalar/scalar/pull/7678): feat: added object stringification to useClipboard
+
+- **@scalar/oas-utils@0.6.16**
+
+## 0.16.18
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.15**
+
+## 0.16.17
+
+### Patch Changes
+
+- [#7680](https://github.com/scalar/scalar/pull/7680): feat(components): simplify nested sidebar items styles
+
+## 0.16.16
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/use-hooks@0.3.5**
+  - [#7661](https://github.com/scalar/scalar/pull/7661): fix: all issues for client modal v2 preparation
+
+- **@scalar/helpers@0.2.6**
+  - [#7661](https://github.com/scalar/scalar/pull/7661): fix: all issues for client modal v2 preparation
+
+- **@scalar/oas-utils@0.6.14**
+
+## 0.16.15
+
+### Patch Changes
+
+#### Updated Dependencies
+
+- **@scalar/use-hooks@0.3.4**
+  - [#7605](https://github.com/scalar/scalar/pull/7605): fix: all issues for client modal v2 preparation
+
+- **@scalar/helpers@0.2.5**
+  - [#7605](https://github.com/scalar/scalar/pull/7605): fix: all issues for client modal v2 preparation
+
+- **@scalar/oas-utils@0.6.13**
+
+## 0.16.14
+
+### Patch Changes
+
+- [#7654](https://github.com/scalar/scalar/pull/7654): fix(components): explicitly set line height for buttons and sections
+
+#### Updated Dependencies
+
+- **@scalar/code-highlight@0.2.2**
+
+- **@scalar/helpers@0.2.4**
+
+- **@scalar/icons@0.5.2**
+
+- **@scalar/oas-utils@0.6.12**
+
+- **@scalar/themes@0.13.26**
+
+- **@scalar/use-hooks@0.3.3**
+
+## 0.16.13
+
+### Patch Changes
+
+- [#7584](https://github.com/scalar/scalar/pull/7584): fix: remove internal unused export
+  - `CARD_Heading_SYMBOL`
+  - `FORM_GROUP_SYMBOL`
+  - `formatHotKey#isDefault`
+  - `LoadingCompletionOptions`
+  - `MaybeElement`
+  - `ScalarComboBox#isGroup`
+
+- [#7584](https://github.com/scalar/scalar/pull/7584): fix: remove unused `@scalar/use-toasts` dependency
+- [#7604](https://github.com/scalar/scalar/pull/7604): fix(components): improve sidebar groups
+- [#7589](https://github.com/scalar/scalar/pull/7589): chore(components): upgrade to Storybook 10
+
+#### Updated Dependencies
+
+- **@scalar/oas-utils@0.6.12**
+
+## 0.16.12
+
+### Patch Changes
+
+- [#7562](https://github.com/scalar/scalar/pull/7562): feat(components): remove headless ui from dropdown component
+
+## 0.16.11
+
+### Patch Changes
+
+- [#7581](https://github.com/scalar/scalar/pull/7581): fix: npm publish job
+
+#### Updated Dependencies
+
+- **@scalar/helpers@0.2.4**
+  - [#7581](https://github.com/scalar/scalar/pull/7581): fix: npm publish job
+  - [#7567](https://github.com/scalar/scalar/pull/7567): feat: add code samples to client v2
+
+- **@scalar/icons@0.5.2**
+  - [#7581](https://github.com/scalar/scalar/pull/7581): fix: npm publish job
+
+- **@scalar/oas-utils@0.6.11**
+  - [#7581](https://github.com/scalar/scalar/pull/7581): fix: npm publish job
+
+## 0.16.10
+
+### Patch Changes
+
+- [#7531](https://github.com/scalar/scalar/pull/7531): feat(components): add discrete sidebar group buttons
+
+#### Updated Dependencies
+
+- **@scalar/icons@0.5.1**
+  - [#7542](https://github.com/scalar/scalar/pull/7542): fix: move `generate-icons` script outside of src folder
+
+No need to include it in published packages
+
+- [#7542](https://github.com/scalar/scalar/pull/7542): fix: use named instead of star exports
+
+- **@scalar/helpers@0.2.3**
+  - [#7575](https://github.com/scalar/scalar/pull/7575): feat: add support for object examples + hide body when empty
+
+- **@scalar/oas-utils@0.6.10**
+
+## 0.16.9
+
+### Patch Changes
+
+- Updated dependencies [[`93ffb63`](https://github.com/scalar/scalar/commit/93ffb63e9d97c7a4ea810d9eeb95cc416c368806)]:
+  - @scalar/code-highlight@0.2.2
+  - @scalar/oas-utils@0.6.9
+  - @scalar/helpers@0.2.2
+  - @scalar/icons@0.5.0
+  - @scalar/themes@0.13.26
+  - @scalar/use-hooks@0.3.3
+  - @scalar/use-toasts@0.9.1
+
+## 0.16.8
+
+### Patch Changes
+
+- [#7520](https://github.com/scalar/scalar/pull/7520) [`4ac6227`](https://github.com/scalar/scalar/commit/4ac62278d4205c34a1a302b756ef3632185876cf) Thanks [@hwkr](https://github.com/hwkr)! - refactor(components): apply sidebar variables
+
+- Updated dependencies [[`f7c24e4`](https://github.com/scalar/scalar/commit/f7c24e4995580649dbc3cb87007a683f5dd91f7c), [`4ac6227`](https://github.com/scalar/scalar/commit/4ac62278d4205c34a1a302b756ef3632185876cf)]:
+  - @scalar/helpers@0.2.2
+  - @scalar/themes@0.13.26
+  - @scalar/oas-utils@0.6.8
+  - @scalar/code-highlight@0.2.1
+
+## 0.16.7
+
+### Patch Changes
+
+- Updated dependencies [[`72cd82f`](https://github.com/scalar/scalar/commit/72cd82fb8df63a9e5d0db1202978aebfefd0457a), [`21aa62e`](https://github.com/scalar/scalar/commit/21aa62e2ebdd262cb5aa53658c3b659736660722), [`72cd82f`](https://github.com/scalar/scalar/commit/72cd82fb8df63a9e5d0db1202978aebfefd0457a)]:
+  - @scalar/oas-utils@0.6.7
+  - @scalar/helpers@0.2.1
+  - @scalar/use-hooks@0.3.3
+
+## 0.16.6
+
+### Patch Changes
+
+- Updated dependencies [[`9ec8adf`](https://github.com/scalar/scalar/commit/9ec8adfea017333dee5bc3949104232f7dc57f4a), [`cc4de25`](https://github.com/scalar/scalar/commit/cc4de2587b36f0d169b01c1bf312ba91b67e3e0c)]:
+  - @scalar/helpers@0.2.0
+  - @scalar/use-hooks@0.3.2
+  - @scalar/oas-utils@0.6.6
+
+## 0.16.5
+
+### Patch Changes
+
+- [#7371](https://github.com/scalar/scalar/pull/7371) [`5aa0380`](https://github.com/scalar/scalar/commit/5aa0380adfcd173e58659fb5dd57df363d985583) Thanks [@hwkr](https://github.com/hwkr)! - feat(sidebar): convert draggable logic to a hook
+
+- [#7460](https://github.com/scalar/scalar/pull/7460) [`62b5210`](https://github.com/scalar/scalar/commit/62b521092bafeb8e83e79222e13378c4a19defc8) Thanks [@hwkr](https://github.com/hwkr)! - feat(components): update and polish ScalarLoading
+
+- Updated dependencies [[`781f264`](https://github.com/scalar/scalar/commit/781f2648bc758a251435c3a1e2b126a37f20e44f), [`ea13cd2`](https://github.com/scalar/scalar/commit/ea13cd2a44ff1ba7f19abcfcad1e51c9e7a0b75d), [`bfd814a`](https://github.com/scalar/scalar/commit/bfd814a4219660face190041cc4845182b56ab03), [`ea13cd2`](https://github.com/scalar/scalar/commit/ea13cd2a44ff1ba7f19abcfcad1e51c9e7a0b75d), [`781f264`](https://github.com/scalar/scalar/commit/781f2648bc758a251435c3a1e2b126a37f20e44f), [`35af6bf`](https://github.com/scalar/scalar/commit/35af6bfce4bc4ae3d0fc5783ea36e0165e964361), [`86f028d`](https://github.com/scalar/scalar/commit/86f028deb0b456f923edd261f5f4b0fa9b616b7d)]:
+  - @scalar/code-highlight@0.2.1
+  - @scalar/use-toasts@0.9.1
+  - @scalar/helpers@0.1.3
+  - @scalar/themes@0.13.25
+  - @scalar/oas-utils@0.6.5
+  - @scalar/icons@0.5.0
+  - @scalar/use-hooks@0.3.1
+
+## 0.16.4
+
+### Patch Changes
+
+- [#7306](https://github.com/scalar/scalar/pull/7306) [`5a108fc`](https://github.com/scalar/scalar/commit/5a108fcbc52ae7957731c23689896ba353b83d3b) Thanks [@hwkr](https://github.com/hwkr)! - feat(components): add ScalarThemeSwatches component
+
+- [#7348](https://github.com/scalar/scalar/pull/7348) [`cded2d6`](https://github.com/scalar/scalar/commit/cded2d6c087418c3c44731d344d0827a87b78b74) Thanks [@hwkr](https://github.com/hwkr)! - feat(components): add ScalarWrappingText component
+
+- Updated dependencies [[`d86f1d6`](https://github.com/scalar/scalar/commit/d86f1d6911ecbca70b011a2a0efb6d6e0eca59bb), [`0519a33`](https://github.com/scalar/scalar/commit/0519a33c7d3f3cf65b93b37392c51d3c0586cbab), [`5a108fc`](https://github.com/scalar/scalar/commit/5a108fcbc52ae7957731c23689896ba353b83d3b), [`cded2d6`](https://github.com/scalar/scalar/commit/cded2d6c087418c3c44731d344d0827a87b78b74)]:
+  - @scalar/helpers@0.1.2
+  - @scalar/oas-utils@0.6.4
+  - @scalar/themes@0.13.24
+  - @scalar/code-highlight@0.2.0
+  - @scalar/icons@0.5.0
+  - @scalar/use-hooks@0.3.0
+  - @scalar/use-toasts@0.9.0
+
+## 0.16.3
+
+### Patch Changes
+
+- [#7252](https://github.com/scalar/scalar/pull/7252) [`4bec1ba`](https://github.com/scalar/scalar/commit/4bec1ba332e919c4ee32dcfbfb07bd8ee42c4d74) Thanks [@hwkr](https://github.com/hwkr)! - fix(api-reference): improve wrapping of long strings
+
+- Updated dependencies [[`9c9dbba`](https://github.com/scalar/scalar/commit/9c9dbbaa940667303f0ace59469fd78c2a741937), [`4bec1ba`](https://github.com/scalar/scalar/commit/4bec1ba332e919c4ee32dcfbfb07bd8ee42c4d74)]:
+  - @scalar/helpers@0.1.1
+  - @scalar/oas-utils@0.6.3
+
+## 0.16.2
+
+### Patch Changes
+
+- Updated dependencies [[`fddf294`](https://github.com/scalar/scalar/commit/fddf294b00dd8c9eb5c713c338f2ec6e3f62523d), [`c1ecd0c`](https://github.com/scalar/scalar/commit/c1ecd0c6096f3fbe2e3d8ad3794ea718bb6bce66), [`2377b76`](https://github.com/scalar/scalar/commit/2377b76d050f8de70037b17a32d0dd1181d3311d)]:
+  - @scalar/helpers@0.1.0
+  - @scalar/oas-utils@0.6.2
+
+## 0.16.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @scalar/oas-utils@0.6.1
+
+## 0.16.0
+
+### Minor Changes
+
+- [#7199](https://github.com/scalar/scalar/pull/7199) [`0d9c945`](https://github.com/scalar/scalar/commit/0d9c945a696ea8b826d86f7b48ec6de4d85e64f0) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat: update vue to 3.5.21
+
+### Patch Changes
+
+- [#7154](https://github.com/scalar/scalar/pull/7154) [`348f8f6`](https://github.com/scalar/scalar/commit/348f8f6292ef41844fda1fdd3089a55d97adbc0e) Thanks [@bgrcs](https://github.com/bgrcs)! - export sidebar components
+
+- [#7159](https://github.com/scalar/scalar/pull/7159) [`c22fc4e`](https://github.com/scalar/scalar/commit/c22fc4e5acb49d648014a6100c724a5b33c59cde) Thanks [@amritk](https://github.com/amritk)! - feat: added new layouts for client v2
+
+- [#7129](https://github.com/scalar/scalar/pull/7129) [`6ec8c29`](https://github.com/scalar/scalar/commit/6ec8c299d912111b029e8058979d00968b70691a) Thanks [@geoffgscott](https://github.com/geoffgscott)! - Simplify ApiReferences state management and migrate to new shared sidebar component. Eliminates the useSidebar and useNav hooks in favour of event bubbling and centralized state management in ApiReference.vue
+
+- [#7162](https://github.com/scalar/scalar/pull/7162) [`8a5a6a0`](https://github.com/scalar/scalar/commit/8a5a6a052cc05b0902b05052c80cc429ebc5a730) Thanks [@hwkr](https://github.com/hwkr)! - test(api-reference): add visual regression testing
+
+- [#7227](https://github.com/scalar/scalar/pull/7227) [`704fa30`](https://github.com/scalar/scalar/commit/704fa302b2cdbb17b19ca2d742537ca163d58c1c) Thanks [@hwkr](https://github.com/hwkr)! - feat(sidebar): cleanup structure and improve text wrapping
+
+- [#7209](https://github.com/scalar/scalar/pull/7209) [`a26ced6`](https://github.com/scalar/scalar/commit/a26ced6f2897074f0c102d5ccbff55c6fd520e12) Thanks [@hwkr](https://github.com/hwkr)! - fix(sidebar): word break sidebar entries with no spaces
+
+- [#7144](https://github.com/scalar/scalar/pull/7144) [`6a090a2`](https://github.com/scalar/scalar/commit/6a090a2e07ef961c56041c85ee9786180437593a) Thanks [@hwkr](https://github.com/hwkr)! - feat(useBindCx): add support for style attr
+
+- [#7152](https://github.com/scalar/scalar/pull/7152) [`592533f`](https://github.com/scalar/scalar/commit/592533faf60b6a5ba27909a4ca0847ca9f04a96d) Thanks [@hwkr](https://github.com/hwkr)! - refactor(sidebar): remove some divs from sidebar elements
+
+- [#7094](https://github.com/scalar/scalar/pull/7094) [`eba18d0`](https://github.com/scalar/scalar/commit/eba18d06267a163a8f91396a66f817100ee59461) Thanks [@geoffgscott](https://github.com/geoffgscott)! - Migrate to workspace store as primary source of truth.
+
+- [#7183](https://github.com/scalar/scalar/pull/7183) [`c72a2c5`](https://github.com/scalar/scalar/commit/c72a2c59eb80e1f5e216c687229ff90bea88f554) Thanks [@hwkr](https://github.com/hwkr)! - test(components): fixture team picker snapshots
+
+- Updated dependencies [[`6ec8c29`](https://github.com/scalar/scalar/commit/6ec8c299d912111b029e8058979d00968b70691a), [`9661e81`](https://github.com/scalar/scalar/commit/9661e81907d1a9b74ba30f270f2d6c8e49834cd5), [`81b0a7a`](https://github.com/scalar/scalar/commit/81b0a7a4245619f03161eae639dc5834b77432b6), [`0319b8a`](https://github.com/scalar/scalar/commit/0319b8a8652a50667776b2e9fd27c3e15b34f765), [`6a090a2`](https://github.com/scalar/scalar/commit/6a090a2e07ef961c56041c85ee9786180437593a), [`eba18d0`](https://github.com/scalar/scalar/commit/eba18d06267a163a8f91396a66f817100ee59461), [`0d9c945`](https://github.com/scalar/scalar/commit/0d9c945a696ea8b826d86f7b48ec6de4d85e64f0)]:
+  - @scalar/helpers@0.0.13
+  - @scalar/oas-utils@0.6.0
+  - @scalar/use-hooks@0.3.0
+  - @scalar/use-toasts@0.9.0
+  - @scalar/icons@0.5.0
+  - @scalar/themes@0.13.23
+  - @scalar/code-highlight@0.2.0
+
+## 0.15.1
+
+### Patch Changes
+
+- f8efecd: chore: accept unknown in code block
+- Updated dependencies [3f6d0b9]
+- Updated dependencies [f8efecd]
+  - @scalar/helpers@0.0.12
+  - @scalar/oas-utils@0.5.2
+  - @scalar/themes@0.13.22
+  - @scalar/code-highlight@0.2.0
+
+## 0.15.0
+
+### Minor Changes
+
+- 63ff417: feat: sidebar package
+
+### Patch Changes
+
+- a747da6: feat(components): overhaul and polish ScalarButton ✨
+- c69cb71: fix(components): update list styles to match guides
+- 90d54b6: fix(components): use border to table instead of box shadow
+- Updated dependencies [debdcf6]
+- Updated dependencies [13dcd89]
+  - @scalar/oas-utils@0.5.1
+  - @scalar/themes@0.13.21
+  - @scalar/code-highlight@0.2.0
+
+## 0.14.40
+
+### Patch Changes
+
+- a9f8d56: test(components): expand markdown lists test baselines
+- Updated dependencies [008a0f3]
+- Updated dependencies [f833196]
+  - @scalar/oas-utils@0.5.0
+  - @scalar/themes@0.13.20
+  - @scalar/code-highlight@0.2.0
+
+## 0.14.39
+
+### Patch Changes
+
+- @scalar/oas-utils@0.4.34
+
+## 0.14.38
+
+### Patch Changes
+
+- 0b3c6fa: feat(api-reference): localhost development toolbar
+- bbceb27: fix: long words break markdown table layout
+- Updated dependencies [0b3c6fa]
+  - @scalar/themes@0.13.19
+  - @scalar/code-highlight@0.2.0
+  - @scalar/oas-utils@0.4.33
+
+## 0.14.37
+
+### Patch Changes
+
+- db5b649: feat: auth selector block
+  - @scalar/oas-utils@0.4.32
+
+## 0.14.36
+
+### Patch Changes
+
+- @scalar/oas-utils@0.4.31
+
+## 0.14.35
+
+### Patch Changes
+
+- Updated dependencies [0aa6d26]
+  - @scalar/code-highlight@0.2.0
+  - @scalar/oas-utils@0.4.30
+  - @scalar/themes@0.13.18
+
+## 0.14.34
+
+### Patch Changes
+
+- 498f771: fix(components): default scalar menu links to be <a> tags
+- 8f2a2f2: Bump some dependencies to latest
+- Updated dependencies [bff46e5]
+- Updated dependencies [8f2a2f2]
+  - @scalar/helpers@0.0.11
+  - @scalar/use-hooks@0.2.5
+  - @scalar/themes@0.13.17
+  - @scalar/oas-utils@0.4.29
+  - @scalar/code-highlight@0.1.9
+
+## 0.14.33
+
+### Patch Changes
+
+- @scalar/oas-utils@0.4.28
+
+## 0.14.32
+
+### Patch Changes
+
+- @scalar/oas-utils@0.4.27
+
+## 0.14.31
+
+### Patch Changes
+
+- 2249fe3: fix: a > img takes the full width
+- Updated dependencies [821717b]
+  - @scalar/oas-utils@0.4.26
+  - @scalar/helpers@0.0.10
+
+## 0.14.30
+
+### Patch Changes
+
+- @scalar/oas-utils@0.4.25
+
+## 0.14.29
+
+### Patch Changes
+
+- c470c60: fix(components): update scalar menu button flex
+  - @scalar/oas-utils@0.4.24
+  - @scalar/themes@0.13.16
+  - @scalar/code-highlight@0.1.9
+
+## 0.14.28
+
+### Patch Changes
+
+- f918582: feat(api-reference, components): update scalar floating components contraints
+- 422cb2b: feat(components)!: add "Add new option" slot to combobox
+- Updated dependencies [714b197]
+- Updated dependencies [98c55d0]
+- Updated dependencies [cededd8]
+- Updated dependencies [a6ae22a]
+- Updated dependencies [2b22eab]
+- Updated dependencies [0e747c7]
+- Updated dependencies [976366f]
+  - @scalar/oas-utils@0.4.23
+  - @scalar/helpers@0.0.9
+  - @scalar/themes@0.13.15
+  - @scalar/code-highlight@0.1.9
+
+## 0.14.27
+
+### Patch Changes
+
+- @scalar/oas-utils@0.4.22
+- @scalar/themes@0.13.14
+- @scalar/code-highlight@0.1.9
+
+## 0.14.26
+
+### Patch Changes
+
+- Updated dependencies [e2272a1]
+- Updated dependencies [b6f4b60]
+  - @scalar/oas-utils@0.4.21
+
+## 0.14.25
+
+### Patch Changes
+
+- 172e397: feat(components): add hotkey component and tooltip support
+- d8b8a5b: fix(components): add scalar fonts to storybook
+- 6c24be9: feat(components): update scalar hotkey design
+- 638120c: test(components): add additional component snapshots and functionality
+- 0804cfc: eat(components): Add ScalarMarkdown summary component
+- Updated dependencies [bbef120]
+- Updated dependencies [a1429ca]
+- Updated dependencies [66b18fc]
+- Updated dependencies [5f022b5]
+- Updated dependencies [6c24be9]
+  - @scalar/oas-utils@0.4.20
+  - @scalar/helpers@0.0.8
+  - @scalar/themes@0.13.13
+  - @scalar/code-highlight@0.1.9
+  - @scalar/icons@0.4.7
+  - @scalar/use-hooks@0.2.4
+  - @scalar/use-toasts@0.8.0
+
+## 0.14.24
+
+### Patch Changes
+
+- 58b9321: feat: adds scalar code block copy component
+- fbafeab: test(components): add snapshot testing to scalar components
+- Updated dependencies [3de82ac]
+- Updated dependencies [b1ceaab]
+  - @scalar/oas-utils@0.4.19
+  - @scalar/icons@0.4.7
+  - @scalar/code-highlight@0.1.9
+  - @scalar/themes@0.13.12
+  - @scalar/use-hooks@0.2.4
+  - @scalar/use-toasts@0.8.0
+
+## 0.14.23
+
+### Patch Changes
+
+- Updated dependencies [46bfd2f]
+  - @scalar/oas-utils@0.4.18
+
+## 0.14.22
+
+### Patch Changes
+
+- dd00357: feat(components): add support for custom combobox items
+- Updated dependencies [46ebe6e]
+  - @scalar/oas-utils@0.4.17
+
+## 0.14.21
+
+### Patch Changes
+
+- f913898: fix(components): apply tooltip shadow without tailwind variant
+- cf5d6a2: fix(components): make paragraph line height variable
+- 1af32c0: fix: sets scalar markdown contents and p display for in li usage
+- f3d0216: feat: lazy loading v1.5
+- af22451: feat: increases caret icon usage and style concistency amongst reference and client
+- Updated dependencies [d4cb86b]
+- Updated dependencies [94d6d0c]
+- Updated dependencies [952f471]
+- Updated dependencies [b957a2c]
+- Updated dependencies [3c1e3e3]
+  - @scalar/code-highlight@0.1.9
+  - @scalar/oas-utils@0.4.16
+  - @scalar/themes@0.13.12
+
+## 0.14.20
+
+### Patch Changes
+
+- 60c7bef: fix: updates auth description overflowing line clamp
+- cac47ea: fix: sets missing line height contraint and transform reset
+- Updated dependencies [fb62e1b]
+  - @scalar/themes@0.13.11
+  - @scalar/oas-utils@0.4.15
+  - @scalar/code-highlight@0.1.8
+
+## 0.14.19
+
+### Patch Changes
+
+- a04cc15: feat(components): create scalar card component
+- 85ee2ce: feat: updates markdown ordered list style
+- fbaaa12: fix(components): update add scalar classes to always watch for the headless root
+- 85ee2ce: feat: updates markdown alert component style
+- 97721b5: feat: updates scalar search input style
+- 85ee2ce: feat: moves markdown style from code-highlight to components package
+- Updated dependencies [85ee2ce]
+- Updated dependencies [85ee2ce]
+- Updated dependencies [8a67f4f]
+  - @scalar/code-highlight@0.1.8
+  - @scalar/themes@0.13.10
+  - @scalar/oas-utils@0.4.14
+
+## 0.14.18
+
+### Patch Changes
+
+- 934dff9: feat(components): sidebar component follow up
+- Updated dependencies [6ab3a21]
+- Updated dependencies [71958fd]
+  - @scalar/code-highlight@0.1.7
+  - @scalar/oas-utils@0.4.13
+
+## 0.14.17
+
+### Patch Changes
+
+- cd1c367: refactor(components): update slot definitions to use unknown instead of any
+- 4d89219: fix: rollback scalar combobox options timeout
+- 244edda: fix: updates scalar toggle background and width
+- 1db9130: feat(components): add nested sidebar component
+- Updated dependencies [661c7e9]
+- Updated dependencies [c826b3e]
+- Updated dependencies [903f975]
+- Updated dependencies [80acf84]
+  - @scalar/themes@0.13.9
+  - @scalar/oas-utils@0.4.12
+  - @scalar/code-highlight@0.1.6
+
+## 0.14.16
+
+### Patch Changes
+
+- ca77d70: skip tooltip initialization during SSR
+- a696604: fix: favors ref over useTemplateRef in scalar combobox option
+- 3fdc2f2: feat(api-reference): unify inconsistent font styles across scalar client and ref, and improve consistency"
+- Updated dependencies [58287f8]
+- Updated dependencies [74fdc0e]
+- Updated dependencies [3fdc2f2]
+  - @scalar/oas-utils@0.4.11
+  - @scalar/themes@0.13.8
+  - @scalar/code-highlight@0.1.5
+
+## 0.14.15
+
+### Patch Changes
+
+- Updated dependencies [2d7f995]
+  - @scalar/code-highlight@0.1.5
+  - @scalar/oas-utils@0.4.10
+  - @scalar/use-hooks@0.2.4
+  - @scalar/themes@0.13.7
+  - @scalar/icons@0.4.6
+  - @scalar/use-toasts@0.8.0
+
+## 0.14.14
+
+### Patch Changes
+
+- 533469b: refactor: decouple request code block from the state (not in use yet)
+- 3393c83: fix: focus is not defined in search
+- 4f47b3c: feat(components): scalar icon button cleanup
+- 8e85856: fix: autofocus scroll on popover panel
+- Updated dependencies [4f47b3c]
+- Updated dependencies [23b150b]
+  - @scalar/icons@0.4.5
+  - @scalar/oas-utils@0.4.9
+  - @scalar/themes@0.13.6
+  - @scalar/code-highlight@0.1.4
+
+## 0.14.13
+
+### Patch Changes
+
+- c907685: fix(components): set sidebar search button leading
+- 4bbbb32: feat(components): add sidebar sections
+- Updated dependencies [4bbbb32]
+  - @scalar/use-hooks@0.2.3
+  - @scalar/themes@0.13.5
+  - @scalar/code-highlight@0.1.4
+  - @scalar/oas-utils@0.4.8
+
+## 0.14.12
+
+### Patch Changes
+
+- Updated dependencies [ca18c0b]
+  - @scalar/themes@0.13.4
+  - @scalar/code-highlight@0.1.4
+  - @scalar/oas-utils@0.4.7
+
+## 0.14.11
+
+### Patch Changes
+
+- 699df60: feat(components): sidebar search input / button
+- Updated dependencies [699df60]
+  - @scalar/icons@0.4.4
+
+## 0.14.10
+
+### Patch Changes
+
+- Updated dependencies [979139e]
+- Updated dependencies [aaf90bf]
+  - @scalar/oas-utils@0.4.6
+
+## 0.14.9
+
+### Patch Changes
+
+- Updated dependencies [7913193]
+  - @scalar/code-highlight@0.1.4
+
+## 0.14.8
+
+### Patch Changes
+
+- 4156f1d: Expand workspace store integration
+- 177438d: feat(components): deprecate ScalarIcon component
+- Updated dependencies [2974dd6]
+- Updated dependencies [221e35f]
+- Updated dependencies [4156f1d]
+- Updated dependencies [a37df33]
+- Updated dependencies [177438d]
+  - @scalar/oas-utils@0.4.5
+  - @scalar/code-highlight@0.1.3
+  - @scalar/icons@0.4.3
+  - @scalar/themes@0.13.3
+  - @scalar/use-hooks@0.2.2
+  - @scalar/use-toasts@0.8.0
+
+## 0.14.7
+
+### Patch Changes
+
+- @scalar/oas-utils@0.4.4
+
+## 0.14.6
+
+### Patch Changes
+
+- ba84a3c: feat(components): add ScalarFormError
+- Updated dependencies [00fc827]
+- Updated dependencies [ba84a3c]
+- Updated dependencies [8165b3b]
+- Updated dependencies [358eb63]
+  - @scalar/code-highlight@0.1.2
+  - @scalar/themes@0.13.2
+  - @scalar/oas-utils@0.4.3
+  - @scalar/icons@0.4.2
+  - @scalar/use-hooks@0.2.2
+  - @scalar/use-toasts@0.8.0
+
+## 0.14.5
+
+### Patch Changes
+
+- f1c0c01: fix(components): clean up ScalarButton disabled behaviour
+- df7efac: fix: reverts variant change zoomed to md in scalar modal
+- Updated dependencies [7ca47ab]
+  - @scalar/oas-utils@0.4.2
+
+## 0.14.4
+
+### Patch Changes
+
+- Updated dependencies [85877aa]
+  - @scalar/themes@0.13.1
+  - @scalar/code-highlight@0.1.1
+  - @scalar/oas-utils@0.4.1
+
+## 0.14.3
+
+### Patch Changes
+
+- 785939b: feat: adds id to markdown heading
+- cad6277: feat(themes)!: migrate to tailwind v4
+- ffa93fa: feat(themes): use .scalar-app as the base class for all tailwind styles
+- cedca9b: feat(components): export file upload component
+- Updated dependencies [785939b]
+- Updated dependencies [1e87feb]
+- Updated dependencies [cad6277]
+  - @scalar/code-highlight@0.1.1
+  - @scalar/oas-utils@0.4.0
+  - @scalar/themes@0.13.0
+  - @scalar/use-hooks@0.2.2
+  - @scalar/icons@0.4.2
+  - @scalar/use-toasts@0.8.0
+
+## 0.14.2
+
+### Patch Changes
+
+- Updated dependencies [151ef09]
+- Updated dependencies [442c0a3]
+  - @scalar/oas-utils@0.3.2
+
+## 0.14.1
+
+### Patch Changes
+
+- 4440949: chore: bumping packages
+- Updated dependencies [4440949]
+  - @scalar/oas-utils@0.3.1
+  - @scalar/themes@0.12.1
+  - @scalar/code-highlight@0.1.0
+  - @scalar/use-hooks@0.2.1
+  - @scalar/icons@0.4.1
+
+## 0.14.0
+
+### Minor Changes
+
+- 483ca93: chore: require Node 20 (or above)
+
+### Patch Changes
+
+- 5613e40: feat(components): scalar tooltip overhaul
+- 0efcab4: chore: remove old helper file from components
+- Updated dependencies [30bab1d]
+- Updated dependencies [5613e40]
+- Updated dependencies [483ca93]
+  - @scalar/oas-utils@0.3.0
+  - @scalar/themes@0.12.0
+  - @scalar/code-highlight@0.1.0
+  - @scalar/use-toasts@0.8.0
+  - @scalar/use-hooks@0.2.0
+  - @scalar/icons@0.4.0
+
+## 0.13.59
+
+### Patch Changes
+
+- 1843cfe: fix(components): set search result item to use an anchor tag
+  - @scalar/themes@0.11.3
+  - @scalar/code-highlight@0.0.29
+  - @scalar/use-hooks@0.1.50
+  - @scalar/icons@0.3.7
+
+## 0.13.58
+
+### Patch Changes
+
+- af38fa6: feat: updates scalar loading component style
+- Updated dependencies [90b773e]
+  - @scalar/themes@0.11.2
+  - @scalar/code-highlight@0.0.29
+  - @scalar/use-hooks@0.1.49
+  - @scalar/icons@0.3.6
+
+## 0.13.57
+
+### Patch Changes
+
+- 8c7bad8: chore: move build tooling to esbuild
+- Updated dependencies [8c7bad8]
+- Updated dependencies [2157fb4]
+  - @scalar/code-highlight@0.0.29
+  - @scalar/use-toasts@0.7.10
+  - @scalar/use-hooks@0.1.48
+  - @scalar/themes@0.11.1
+  - @scalar/icons@0.3.5
+
+## 0.13.56
+
+### Patch Changes
+
+- Updated dependencies [e8457cb]
+  - @scalar/themes@0.11.0
+  - @scalar/code-highlight@0.0.28
+  - @scalar/use-hooks@0.1.47
+  - @scalar/icons@0.3.4
+
+## 0.13.55
+
+### Patch Changes
+
+- d2f27f4: fix: sets scalar tooltip content word break to all
+
+## 0.13.54
+
+### Patch Changes
+
+- @scalar/themes@0.10.4
+- @scalar/code-highlight@0.0.27
+- @scalar/icons@0.3.3
+- @scalar/use-hooks@0.1.46
+- @scalar/use-toasts@0.7.9
+
+## 0.13.53
+
+### Patch Changes
+
+- @scalar/themes@0.10.3
+- @scalar/code-highlight@0.0.27
+- @scalar/use-hooks@0.1.45
+- @scalar/icons@0.3.2
+
+## 0.13.52
+
+### Patch Changes
+
+- 1f8ac99: chore: export type for combobox group
+  - @scalar/themes@0.10.2
+  - @scalar/code-highlight@0.0.27
+  - @scalar/use-hooks@0.1.44
+  - @scalar/icons@0.3.1
+
+## 0.13.51
+
+### Patch Changes
+
+- 2b61d8e: docs(icons): update docs and storybook
+- ab4cf5a: fix: adds text size variants to scalar tooltip
+- Updated dependencies [2b61d8e]
+- Updated dependencies [49f1297]
+  - @scalar/use-hooks@0.1.43
+  - @scalar/icons@0.3.0
+  - @scalar/themes@0.10.1
+  - @scalar/code-highlight@0.0.27
+
+## 0.13.50
+
+### Patch Changes
+
+- 363276e: feat(icons): add Phosphor icons to @scalar/icons
+- a9f232a: fix(components): break words when wrapping search results
+- Updated dependencies [363276e]
+  - @scalar/icons@0.2.0
+  - @scalar/use-hooks@0.1.42
+
+## 0.13.49
+
+### Patch Changes
+
+- cdaafe4: fix(components): alert when no results found in search
+
+## 0.13.48
+
+### Patch Changes
+
+- Updated dependencies [feaa314]
+  - @scalar/themes@0.10.0
+  - @scalar/code-highlight@0.0.27
+  - @scalar/use-hooks@0.1.41
+
+## 0.13.47
+
+### Patch Changes
+
+- 5b19c90: refactor(components): cleanup old icons in Scalar components
+- f705230: feat(components): scalar form text field improvements
+  - @scalar/themes@0.9.86
+  - @scalar/code-highlight@0.0.27
+  - @scalar/use-hooks@0.1.40
+
+## 0.13.46
+
+### Patch Changes
+
+- Updated dependencies [8720ae7]
+  - @scalar/themes@0.9.85
+  - @scalar/code-highlight@0.0.27
+  - @scalar/use-hooks@0.1.39
+
+## 0.13.45
+
+### Patch Changes
+
+- 799845f: feat(components): allow ScalarCodeblock to support different font sizes
+- 73f5553: fix(api-reference): references search a11y improvements
+- Updated dependencies [799845f]
+  - @scalar/code-highlight@0.0.27
+
+## 0.13.44
+
+### Patch Changes
+
+- Updated dependencies [0e888bc]
+  - @scalar/code-highlight@0.0.26
+
+## 0.13.43
+
+### Patch Changes
+
+- @scalar/themes@0.9.84
+- @scalar/code-highlight@0.0.25
+- @scalar/use-hooks@0.1.38
+
+## 0.13.42
+
+### Patch Changes
+
+- @scalar/themes@0.9.83
+- @scalar/code-highlight@0.0.25
+- @scalar/use-hooks@0.1.37
+
+## 0.13.41
+
+### Patch Changes
+
+- @scalar/themes@0.9.82
+- @scalar/code-highlight@0.0.25
+- @scalar/use-hooks@0.1.36
+
+## 0.13.40
+
+### Patch Changes
+
+- @scalar/themes@0.9.81
+- @scalar/code-highlight@0.0.25
+- @scalar/use-hooks@0.1.35
+
+## 0.13.39
+
+### Patch Changes
+
+- 427c325: fix(components): add missing forms exports
+- 9a2d008: fix(components): don't show form field label if none is provided
+
+## 0.13.38
+
+### Patch Changes
+
+- 0f13162: chore: enable more Biome flags, apply linter fixes
+- cc1ec74: fix(components): use nearest for combobox scrollIntoView
+- 2716898: fix(components): handle no active option for combobox
+  - @scalar/themes@0.9.80
+  - @scalar/code-highlight@0.0.25
+  - @scalar/use-hooks@0.1.34
+
+## 0.13.37
+
+### Patch Changes
+
+- @scalar/themes@0.9.79
+- @scalar/code-highlight@0.0.25
+- @scalar/use-hooks@0.1.33
+
+## 0.13.36
+
+### Patch Changes
+
+- e0ee082: fix(components): improve ScalarCombobox screen reader a11y
+- 1437882: feat(components): create ScalarTextInput and ScalarTextArea
+- Updated dependencies [1437882]
+- Updated dependencies [e00fa7e]
+- Updated dependencies [632978d]
+  - @scalar/themes@0.9.78
+  - @scalar/code-highlight@0.0.25
+  - @scalar/use-hooks@0.1.32
+
+## 0.13.35
+
+### Patch Changes
+
+- @scalar/themes@0.9.77
+- @scalar/code-highlight@0.0.24
+- @scalar/use-hooks@0.1.31
+
+## 0.13.34
+
+### Patch Changes
+
+- @scalar/themes@0.9.76
+- @scalar/code-highlight@0.0.24
+- @scalar/use-hooks@0.1.30
+
+## 0.13.33
+
+### Patch Changes
+
+- 4d03e0f: feat: multiple documents
+  - @scalar/themes@0.9.75
+  - @scalar/code-highlight@0.0.24
+  - @scalar/use-hooks@0.1.29
+
+## 0.13.32
+
+### Patch Changes
+
+- df4dee8: fix(api-client): improve api client request and response area a11y
+- 8c5b0c6: fix: removes scalar modal scoped position
+- Updated dependencies [9319c0c]
+- Updated dependencies [9319c0c]
+  - @scalar/code-highlight@0.0.24
+
+## 0.13.31
+
+### Patch Changes
+
+- 3f99afc: fix: removes auto margin in scalar modal
+  - @scalar/themes@0.9.74
+  - @scalar/code-highlight@0.0.23
+  - @scalar/use-hooks@0.1.28
+
+## 0.13.30
+
+### Patch Changes
+
+- @scalar/themes@0.9.73
+- @scalar/code-highlight@0.0.23
+- @scalar/use-hooks@0.1.27
+
+## 0.13.29
+
+### Patch Changes
+
+- 479a2ef: fix(api-reference): improve references focus management
+- Updated dependencies [89d8b75]
+  - @scalar/themes@0.9.72
+  - @scalar/code-highlight@0.0.23
+  - @scalar/use-hooks@0.1.26
+  - @scalar/use-toasts@0.7.9
+
+## 0.13.28
+
+### Patch Changes
+
+- 0d4520f: fix(themes): improve how we handle zoomed in screens
+- Updated dependencies [0d4520f]
+  - @scalar/use-hooks@0.1.25
+  - @scalar/themes@0.9.71
+  - @scalar/code-highlight@0.0.23
+
+## 0.13.27
+
+### Patch Changes
+
+- @scalar/themes@0.9.70
+- @scalar/code-highlight@0.0.23
+- @scalar/use-hooks@0.1.24
+
+## 0.13.26
+
+### Patch Changes
+
+- f61e986: fix(components): set the submenu z-index above the menu
+- c9a8fd8: feat(components): add sidebar nesting indicator lines
+- 8d9a2c0: feat: adds alert icon
+- bd70ab6: fix(api-reference): improve search button and modal a11y
+- e55bfd2: fix(components): improve ScalarModal zoom handling
+- Updated dependencies [c9a8fd8]
+- Updated dependencies [3feee27]
+- Updated dependencies [c10bbf5]
+- Updated dependencies [9251b22]
+- Updated dependencies [8d9a2c0]
+  - @scalar/themes@0.9.69
+  - @scalar/code-highlight@0.0.23
+  - @scalar/use-hooks@0.1.23
+  - @scalar/use-toasts@0.7.9
+
+## 0.13.25
+
+### Patch Changes
+
+- e350f23: chore: code style
+- e47a698: feat: adds alert icon
+- Updated dependencies [e350f23]
+- Updated dependencies [e47a698]
+  - @scalar/code-highlight@0.0.22
+  - @scalar/themes@0.9.68
+  - @scalar/use-hooks@0.1.22
+  - @scalar/use-toasts@0.7.9
+
+## 0.13.24
+
+### Patch Changes
+
+- 825bc40: feat(components): update lock icons to align with other icons
+- Updated dependencies [fa6afe8]
+- Updated dependencies [1223c1f]
+  - @scalar/code-highlight@0.0.21
+  - @scalar/use-toasts@0.7.9
+  - @scalar/use-hooks@0.1.21
+  - @scalar/themes@0.9.67
+
+## 0.13.23
+
+### Patch Changes
+
+- 69da9e0: feat(components): create file uploader component
+- f500435: chore: stricter TypeScript configuration
+  - @scalar/themes@0.9.66
+  - @scalar/code-highlight@0.0.20
+  - @scalar/use-hooks@0.1.20
+
+## 0.13.22
+
+### Patch Changes
+
+- abc40ce: feat: updates scalar combobox options style
+
+## 0.13.21
+
+### Patch Changes
+
+- 9f2ec32: fix(components): set z-index on ScalarMenu by default
+- 9f2ec32: fix(components): improve combobox resizing
+- 28f23d9: feat(components): create sidebar item components
+  - @scalar/themes@0.9.65
+  - @scalar/code-highlight@0.0.20
+  - @scalar/use-hooks@0.1.19
+
+## 0.13.20
+
+### Patch Changes
+
+- 0d8b4ea: fix(components): set z-index on ScalarMenu by default
+
+## 0.13.19
+
+### Patch Changes
+
+- @scalar/themes@0.9.64
+- @scalar/code-highlight@0.0.20
+- @scalar/use-hooks@0.1.18
+
+## 0.13.18
+
+### Patch Changes
+
+- 42d08d7: fix: sets border on inactive checkbox state
+- Updated dependencies [51f3177]
+  - @scalar/themes@0.9.63
+  - @scalar/code-highlight@0.0.20
+  - @scalar/use-hooks@0.1.17
+
+## 0.13.17
+
+### Patch Changes
+
+- 8b5d905: fix: updates floating target ref function
+- 8665004: fix: removes listbox margin
+- 4f12fe4: feat(themes): add scalar danger color
+- 5ab0663: fix: updates button base variant outline offset
+- 917214a: chore: update Scalar support email
+- 776a4e2: docs(components): update components readme
+- Updated dependencies [776a4e2]
+- Updated dependencies [2ed681b]
+- Updated dependencies [4f12fe4]
+  - @scalar/themes@0.9.62
+  - @scalar/code-highlight@0.0.20
+  - @scalar/use-hooks@0.1.16
+
+## 0.13.16
+
+### Patch Changes
+
+- aac6c86: fix(components): improve ScalarMenu team picker a11y
+
+## 0.13.15
+
+### Patch Changes
+
+- 97d8981: feat(components): host storybook on netlify
+- 1bee104: fix: ScalarFloating breaks SSG/SSR environments
+- Updated dependencies [109e320]
+  - @scalar/code-highlight@0.0.20
+  - @scalar/themes@0.9.61
+  - @scalar/use-hooks@0.1.15
+
+## 0.13.14
+
+### Patch Changes
+
+- 2ad0407: fix: updates scalar modal body class specificity
+- e866487: feat(components): create dark light toggle components
+- Updated dependencies [e866487]
+  - @scalar/use-hooks@0.1.14
+  - @scalar/themes@0.9.60
+  - @scalar/code-highlight@0.0.19
+
+## 0.13.13
+
+### Patch Changes
+
+- e17ac68: feat(components): add create team button to team picker
+- 7b4ab2c: feat(components): make ScalarMenu into a dropdown
+- Updated dependencies [7b4ab2c]
+  - @scalar/themes@0.9.59
+  - @scalar/code-highlight@0.0.19
+  - @scalar/use-hooks@0.1.13
+
+## 0.13.12
+
+### Patch Changes
+
+- Updated dependencies [66bc910]
+  - @scalar/use-toasts@0.7.8
+  - @scalar/use-hooks@0.1.12
+
+## 0.13.11
+
+### Patch Changes
+
+- 794ae62: fix(components): fix menu that is two words
+
+## 0.13.10
+
+### Patch Changes
+
+- 46ebb44: fix(components): fix menu logo size
+
+## 0.13.9
+
+### Patch Changes
+
+- 33c8393: style: increases search input gap
+
+## 0.13.8
+
+### Patch Changes
+
+- c65f3fc: chore(components): ScalarMenu component cleanup
+- Updated dependencies [6407b2b]
+- Updated dependencies [c65f3fc]
+  - @scalar/code-highlight@0.0.19
+  - @scalar/themes@0.9.58
+  - @scalar/use-hooks@0.1.11
+
+## 0.13.7
+
+### Patch Changes
+
+- @scalar/themes@0.9.57
+- @scalar/code-highlight@0.0.18
+- @scalar/use-hooks@0.1.10
+
+## 0.13.6
+
+### Patch Changes
+
+- 23daedd: feat(components): create ScalarHeader component
+- Updated dependencies [23daedd]
+  - @scalar/themes@0.9.56
+  - @scalar/code-highlight@0.0.18
+  - @scalar/use-hooks@0.1.9
+
+## 0.13.5
+
+### Patch Changes
+
+- @scalar/themes@0.9.55
+- @scalar/code-highlight@0.0.18
+- @scalar/use-hooks@0.1.8
+
+## 0.13.4
+
+### Patch Changes
+
+- 749ebf1: feat: favors scalar teleport in scalar tooltip
+
+## 0.13.3
+
+### Patch Changes
+
+- b66a85c: feat: adds globe icon
+
+## 0.13.2
+
+### Patch Changes
+
+- a90d827: feat(components): create ScalarTeleport component
+
+## 0.13.1
+
+### Patch Changes
+
+- e199e9b: feat: updates chevron up icon
+- e199e9b: feat: updates chevron down icon
+- e199e9b: feat: updates add icon
+- 1f730c6: feat: upgraded cva and added tests
+- f30ce11: feat(components): clean up reactivity for useBindCx
+- Updated dependencies [e199e9b]
+  - @scalar/code-highlight@0.0.18
+  - @scalar/themes@0.9.54
+  - @scalar/use-hooks@0.1.7
+
+## 0.13.0
+
+### Minor Changes
+
+- d08a7ae: feat(components): cleanup and extend floating components
+
+### Patch Changes
+
+- 2dd6aa3: feat(components): update ScalarErrorBoundary
+- 7605d6f: feat: add error boundary component
+- 7278742: feat(components): allow logo in ScalarMenu to adjust width
+- 3ca88dc: feat(components): create useBindCx hook
+- f6cd5ed: feat: updates show hide icons
+  - @scalar/themes@0.9.53
+  - @scalar/code-highlight@0.0.17
+  - @scalar/use-hooks@0.1.6
+
+## 0.12.76
+
+### Patch Changes
+
+- Updated dependencies [1fa0d20]
+  - @scalar/themes@0.9.52
+  - @scalar/code-highlight@0.0.17
+  - @scalar/use-hooks@0.1.5
+
+## 0.12.75
+
+### Patch Changes
+
+- 6140275: fix(components): remove col on larger screens only use row
+- Updated dependencies [91123e8]
+- Updated dependencies [9002259]
+  - @scalar/themes@0.9.51
+  - @scalar/code-highlight@0.0.17
+  - @scalar/use-hooks@0.1.4
+
+## 0.12.74
+
+### Patch Changes
+
+- 324834d: style: sets z context to tooltip content
+- 1b06f64: fix(api-reference): conflicting styles with bulma, galaxy bug on docs
+- Updated dependencies [1b06f64]
+  - @scalar/code-highlight@0.0.16
+  - @scalar/themes@0.9.50
+  - @scalar/use-hooks@0.1.3
+
+## 0.12.73
+
+### Patch Changes
+
+- 28a6b05: style(components): scalar menu flex col for products
+- Updated dependencies [d379b81]
+- Updated dependencies [f67c3bc]
+  - @scalar/themes@0.9.49
+  - @scalar/code-highlight@0.0.15
+  - @scalar/use-hooks@0.1.2
+
+## 0.12.72
+
+### Patch Changes
+
+- 12fed75: Add header button and checkbox component
+- Updated dependencies [0adbfd5]
+- Updated dependencies [2a6117e]
+  - @scalar/use-hooks@0.1.1
+
+## 0.12.71
+
+### Patch Changes
+
+- 7abe0f9: fix: add min height to virtual scroll text component
+
+## 0.12.70
+
+### Patch Changes
+
+- bfad6dc: feat(use-hooks): create @scalar/use-hooks with useColorMode and useClipboard
+- c8fae11: fix(components): cleanup ScalarMenu and ScalarListbox
+- Updated dependencies [bfad6dc]
+- Updated dependencies [c3d9f3c]
+  - @scalar/use-hooks@0.1.0
+
+## 0.12.69
+
+### Patch Changes
+
+- 0a34402: feat(components): simplify index exports
+
+## 0.12.68
+
+### Patch Changes
+
+- b5c1982: style(api-client): fix a handful of z-index and flex breakpoint issues
+- 7f1bd17: feat(components): create ScalarMenu component
+- Updated dependencies [0c07766]
+  - @scalar/themes@0.9.48
+  - @scalar/code-highlight@0.0.15
+
+## 0.12.67
+
+### Patch Changes
+
+- b717102: fix: adds scalar code block max height
+
+## 0.12.66
+
+### Patch Changes
+
+- be50225: fix: improve API client modal accessibility
+
+## 0.12.65
+
+### Patch Changes
+
+- Updated dependencies [a40999d]
+  - @scalar/code-highlight@0.0.15
+  - @scalar/themes@0.9.47
+  - @scalar/use-toasts@0.7.7
+
+## 0.12.64
+
+### Patch Changes
+
+- @scalar/themes@0.9.46
+- @scalar/code-highlight@0.0.14
+
+## 0.12.63
+
+### Patch Changes
+
+- cf4e9c4: fix(components): resize and scroll scalar listbox and dropdown
+- bb3dc9d: fix(api-reference): improve endpoint and tag accessibility
+- Updated dependencies [bb3dc9d]
+  - @scalar/themes@0.9.45
+  - @scalar/code-highlight@0.0.14
+
+## 0.12.62
+
+### Patch Changes
+
+- ad12c56: (style)api-client: fix client border bottom colors
+- ada8545: feat: add the sidebar button
+- Updated dependencies [ad12c56]
+  - @scalar/themes@0.9.44
+  - @scalar/code-highlight@0.0.14
+
+## 0.12.61
+
+### Patch Changes
+
+- 197e3ae: (style)api-client: make input styles more consistent
+- Updated dependencies [197e3ae]
+  - @scalar/themes@0.9.43
+  - @scalar/code-highlight@0.0.14
+
+## 0.12.60
+
+### Patch Changes
+
+- Updated dependencies [2456afa]
+  - @scalar/themes@0.9.42
+  - @scalar/code-highlight@0.0.14
+
+## 0.12.59
+
+### Patch Changes
+
+- 7700c50: Add missing dependencies to package.json
+
+## 0.12.58
+
+### Patch Changes
+
+- Updated dependencies [b4a93ab]
+  - @scalar/code-highlight@0.0.14
+
+## 0.12.57
+
+### Patch Changes
+
+- 32ad241: fix: favors accent over blur color for active elment state
+  - @scalar/code-highlight@0.0.13
+
+## 0.12.56
+
+### Patch Changes
+
+- 4e50d65: feat: adds unwatch icon
+- 4e50d65: feat: adds scalar toggle component
+- 4e50d65: feat: adds watch icon
+- 4e50d65: feat: adds as prop to scalar tooltip
+- 6bbb815: fix(api-reference): search modal a11y improvements
+  - @scalar/code-highlight@0.0.13
+
+## 0.12.55
+
+### Patch Changes
+
+- 971c04c: feat(api-client): create custom workspace selector
+  - @scalar/code-highlight@0.0.13
+
+## 0.12.54
+
+### Patch Changes
+
+- 0c34a18: chore: updated vue package to 3.5
+- Updated dependencies [0c34a18]
+  - @scalar/code-highlight@0.0.13
+
+## 0.12.53
+
+### Patch Changes
+
+- f935fad: style: adds focus visible style to listbox button
+
+## 0.12.52
+
+### Patch Changes
+
+- 0ddd4f3: feat: added virtual text component
+
+## 0.12.51
+
+### Patch Changes
+
+- Updated dependencies [e911047]
+  - @scalar/code-highlight@0.0.12
+
+## 0.12.50
+
+### Patch Changes
+
+- 513e0ad: feat: allow to disable the copy to clipboard button in ScalarCodeBlock
+- 5127a37: style: updates scalar modal animation
+  - @scalar/code-highlight@0.0.11
+
+## 0.12.49
+
+### Patch Changes
+
+- d8baf4e: feat: adds scribble icon
+
+## 0.12.48
+
+### Patch Changes
+
+- dc20180: feat(api-client): custom icons for collections
+  - @scalar/code-highlight@0.0.11
+
+## 0.12.47
+
+### Patch Changes
+
+- 7beeef3: fix: modal dark mode bg
+  - @scalar/code-highlight@0.0.11
+
+## 0.12.46
+
+### Patch Changes
+
+- b856652: chore: performance upgrades for api client sidebar
+
+## 0.12.45
+
+### Patch Changes
+
+- a08aa37: chore: add deleteable combobox
+- ee22a82: feat(components): add / update icons to match line icons
+- 6fd83dc: style: sets context bar back to previous position
+  - @scalar/code-highlight@0.0.11
+
+## 0.12.44
+
+### Patch Changes
+
+- 0fc3460: feat(components): make markdown line clamping configurable
+  - @scalar/code-highlight@0.0.11
+
+## 0.12.43
+
+### Patch Changes
+
+- 1e41dfe: fix: adds endpoints description collapse state
+- ad89ca3: fix: autprefixer warnings
+
+## 0.12.42
+
+### Patch Changes
+
+- Updated dependencies [18744d4]
+  - @scalar/code-highlight@0.0.11
+
+## 0.12.41
+
+### Patch Changes
+
+- 9e8d40d: fix(components): use single scroll container for codeblock
+- c02202c: fix: scalar dropdown item dark mode background brightness
+  - @scalar/code-highlight@0.0.10
+
+## 0.12.40
+
+### Patch Changes
+
+- bbe5b49: feat: update edit and delete icons
+
+## 0.12.39
+
+### Patch Changes
+
+- 9bc0ae7: feat: update scalar icon disabled state
+- a792002: feat: add xl scalar modal
+  - @scalar/code-highlight@0.0.10
+
+## 0.12.38
+
+### Patch Changes
+
+- 6babe66: fix(components): show icon for ScalarTextField errors
+  - @scalar/code-highlight@0.0.10
+
+## 0.12.37
+
+### Patch Changes
+
+- af75550: feat: scalar search input sidebar style
+
+## 0.12.36
+
+### Patch Changes
+
+- 8bde837: fix(components): refactor loading to match icon sizes
+
+## 0.12.35
+
+### Patch Changes
+
+- 7aa26fb: fix(components): fix modal layout
+- 2db9eb8: feat: topnav context menu
+
+## 0.12.34
+
+### Patch Changes
+
+- 78db8f5: feat: use new @scalar/types package
+  - @scalar/code-highlight@0.0.10
+
+## 0.12.33
+
+### Patch Changes
+
+- 7bfee42: fix(components): don't clear loading state automatically
+  - @scalar/code-highlight@0.0.10
+
+## 0.12.32
+
+### Patch Changes
+
+- 48693d7: fix(components): rebuild code block x-y scroll box
+
+## 0.12.31
+
+### Patch Changes
+
+- Updated dependencies [c450bb3]
+  - @scalar/code-highlight@0.0.10
+
+## 0.12.30
+
+### Patch Changes
+
+- db96313: feat: scalar context menu component
+- 6f107e1: style(components): outline user icon
+- db96313: feat: set request sidebar item context menu
+- Updated dependencies [58e5912]
+  - @scalar/code-highlight@0.0.9
+
+## 0.12.29
+
+### Patch Changes
+
+- Updated dependencies [b910fc1]
+  - @scalar/code-highlight@0.0.8
+
+## 0.12.28
+
+### Patch Changes
+
+- 13b2f6d: fix: scalar icon chevron left update
+  - @scalar/code-highlight@0.0.7
+
+## 0.12.27
+
+### Patch Changes
+
+- 09d07d1: fix: api client help and darkmode button, sidebar bugs, backgrounds, etc
+
+## 0.12.26
+
+### Patch Changes
+
+- 3a6effa: feat(api-client): add response previews
+  - @scalar/code-highlight@0.0.7
+
+## 0.12.25
+
+### Patch Changes
+
+- c1ada84: feat(api-client): add the ability to delete and rename folders and collections
+- c1ada84: fix: modal layout and size
+  - @scalar/code-highlight@0.0.7
+
+## 0.12.24
+
+### Patch Changes
+
+- de25d01: feat(api-client): add the ability to delete and rename folders and collections
+  - @scalar/code-highlight@0.0.7
+
+## 0.12.23
+
+### Patch Changes
+
+- 7b58f10: fix: add discord and github line icons
+
+## 0.12.22
+
+### Patch Changes
+
+- bf2895e: feat(api-client): add multiple auth to api client
+- 5d2825a: feat: add sidebar request menu
+
+## 0.12.21
+
+### Patch Changes
+
+- e8fa353: https://github.com/scalar/scalar/pull/2658
+
+## 0.12.20
+
+### Patch Changes
+
+- b2a662a: fix: provide a placeholder for icons while loading
+- 86014b5: feat(components): update combobox styles
+- a60c916: feat(components): add multiselect combobox
+
+## 0.12.19
+
+### Patch Changes
+
+- a5f3a84: feat(components): create combo box component
+- 9a08f46: fix: set component font size to 13px
+  - @scalar/code-highlight@0.0.7
+
+## 0.12.18
+
+### Patch Changes
+
+- 19d8b6a: feat: animate sidebar icon
+
+## 0.12.17
+
+### Patch Changes
+
+- 67aefbf: fix: scalar api client fixed to bottom
+
+## 0.12.16
+
+### Patch Changes
+
+- ff59399: fix: api client spacing issues, and icon thickness
+  - @scalar/code-highlight@0.0.7
+
+## 0.12.15
+
+### Patch Changes
+
+- 7076725: feat(components): add outline icons
+- 1e72b03: fix(components): polish history icon
+- dd2a42e: feat: outline page icon
+
+## 0.12.14
+
+### Patch Changes
+
+- e1aa4fc: fix: add max height to search modal
+
+## 0.12.13
+
+### Patch Changes
+
+- e285a6b: fix: scalar code block copy
+- bff602a: fix: client sidebar item width + some icon issues
+- 6f4d20d: fix: update client icon weights
+- 2f10a39: fix: dark mode icon
+- 2f10a39: fix: lint client scalar icons
+
+## 0.12.12
+
+### Patch Changes
+
+- f86a242: fix: remove scalar dropdown button border
+
+## 0.12.11
+
+### Patch Changes
+
+- e649da6: feat: set copy clipboard in scalar codeblock
+- a1d59de: fix: resize scalar modal
+- Updated dependencies [c2362ee]
+  - @scalar/code-highlight@0.0.7
+
+## 0.12.10
+
+### Patch Changes
+
+- f1b5390: fix: remove tailwind preflight from api client app
+- Updated dependencies [9b035b0]
+  - @scalar/code-highlight@0.0.6
+
+## 0.12.9
+
+### Patch Changes
+
+- d58841b: feat: add props to scalar tooltip
+
+## 0.12.8
+
+### Patch Changes
+
+- a5aedf5: feat: lint workspace sidenav icons
+- a5aedf5: feat: add server icon
+- cd5d1a4: fix: made adding of scalar classes to headless more robust
+
+## 0.12.7
+
+### Patch Changes
+
+- 14e71cd: fix: api client top position on mobile
+  - @scalar/code-highlight@0.0.5
+
+## 0.12.6
+
+### Patch Changes
+
+- c533665: fix: move css imports to style tags
+  - @scalar/code-highlight@0.0.5
+
+## 0.12.5
+
+### Patch Changes
+
+- 4861362: chore: merge modal package into client-app
+
+## 0.12.4
+
+### Patch Changes
+
+- 94e68ab: chore: upgrade typescript to 5.5
+- Updated dependencies [a298195]
+- Updated dependencies [326bd3d]
+- Updated dependencies [94e68ab]
+  - @scalar/oas-utils@0.2.5
+  - @scalar/code-highlight@0.0.5
+
+## 0.12.3
+
+### Patch Changes
+
+- 132acd4: fix: file upload and binary file ui
+- b981770: chore: introduce the new @scalar/api-reference-editor
+- fd18932: fix: scalar button loading state
+- 06471ed: feat: add scalar listbox id prop
+  - @scalar/code-highlight@0.0.4
+
+## 0.12.2
+
+### Patch Changes
+
+- 65f7bf5: fix: scalar icon info update
+  - @scalar/code-highlight@0.0.4
+
+## 0.12.1
+
+### Patch Changes
+
+- c20c7d0: style: minor improvements to the dropdown and listbox comppnents
+- Updated dependencies [c20c7d0]
+  - @scalar/oas-utils@0.2.4
+
+## 0.12.0
+
+### Minor Changes
+
+- e4419ce: feat: add scalar tooltip component
+
+### Patch Changes
+
+- f2c1019: fix: center scalar modal component
+- fd0c93d: fix: shalow ref over ref in scalar icon
+- 7b87b8c: fix: components tailwind specificity
+- 512c815: feat: scalar listbox component full width
+
+## 0.11.6
+
+### Patch Changes
+
+- 5e92eab: feat(#doc-1996): themes css exports
+- Updated dependencies [5e92eab]
+  - @scalar/code-highlight@0.0.4
+
+## 0.11.5
+
+### Patch Changes
+
+- 627e0e5: fix: docusaurus scalar codeblock border radius
+- Updated dependencies [362d47a]
+  - @scalar/oas-utils@0.2.3
+  - @scalar/code-highlight@0.0.3
+
+## 0.11.4
+
+### Patch Changes
+
+- 3d6ca80: fix: scalar modal component padding reset
+- 0fae180: chore: move client app to use @scalar/themes tailwind preset
+  - @scalar/code-highlight@0.0.3
+
+## 0.11.3
+
+### Patch Changes
+
+- 7dbb241: fix: wrapped code blocks
+
+## 0.11.2
+
+### Patch Changes
+
+- a2cb3c3: Migrate away from unintended peer dependencies
+- Updated dependencies [a2cb3c3]
+  - @scalar/oas-utils@0.2.2
+  - @scalar/code-highlight@0.0.3
+
+## 0.11.1
+
+### Patch Changes
+
+- e0fc110: chore: patch bump all package
+- Updated dependencies [e0fc110]
+- Updated dependencies [f0acc89]
+  - @scalar/code-highlight@0.0.3
+  - @scalar/oas-utils@0.2.1
+
+## 0.11.0
+
+### Minor Changes
+
+- 7f8ef74: chore: remove aliasing
+
+### Patch Changes
+
+- 190bcb6: feat: scalar dropdown and listbox offset prop addition
+- f82a767: fix: update dropdown styles
+- 326dcfb: chore: remove @scalar/use-modal package
+- 8494349: Migrate to highlightjs based syntax highlighting
+- b38c7ed: Update build configs to a standardized format
+- 6fbb57e: feat: release all the packages
+- 94084bf: feat: scalar floating teleport
+- c5760b9: fix: focus state in scalar listbox
+- Updated dependencies [7f8ef74]
+- Updated dependencies [96347a1]
+- Updated dependencies [8494349]
+- Updated dependencies [6fbb57e]
+  - @scalar/oas-utils@0.2.0
+  - @scalar/code-highlight@0.0.2
+
+## 0.10.1
+
+### Patch Changes
+
+- 961690d: chore: export listbox component
+- Updated dependencies [c951512]
+  - @scalar/oas-utils@0.1.17
+
+## 0.10.0
+
+### Minor Changes
+
+- 843218d: feat: add listbox component
+
+### Patch Changes
+
+- 83bfad8: chore: lint icon svgs
+- 34eba38: fix: update storybook script
+- 195ca18: fix: align show hide icons with icon standards
+
+## 0.9.0
+
+### Minor Changes
+
+- 7d3bc16: feat: css files must be explicitly imported, check the docs
+- 7d3bc16: BREAKING CHANGE: css must now be explicitly imported, see docs for more details
+
+## 0.8.0
+
+### Minor Changes
+
+- 18ecd33: refactor: remove component app install
+- 26e2392: refactor: remove :where prefix in favor of cascade layers
+
+## 0.7.15
+
+### Patch Changes
+
+- Updated dependencies [cc5402c]
+  - @scalar/oas-utils@0.1.16
+
+## 0.7.14
+
+### Patch Changes
+
+- Updated dependencies [f472998]
+  - @scalar/oas-utils@0.1.15
+
+## 0.7.13
+
+### Patch Changes
+
+- be75488: fix: update password show hide icon
+
+## 0.7.12
+
+### Patch Changes
+
+- 50480c7: feat: set type prop in scalar button component
+- Updated dependencies [7205137]
+- Updated dependencies [d369ac4]
+  - @scalar/oas-utils@0.1.14
+
+## 0.7.11
+
+### Patch Changes
+
+- Updated dependencies [5aa656f]
+  - @scalar/oas-utils@0.1.13
+
+## 0.7.10
+
+### Patch Changes
+
+- dfe51b1: style: brightened ScalarButton ghost highlight color
+- 925572f: fix: add scalar component scope to missing components
+- Updated dependencies [61b8ddc]
+- Updated dependencies [165b901]
+  - @scalar/oas-utils@0.1.12
+
+## 0.7.9
+
+### Patch Changes
+
+- e3a72bb: style: updated icon button size
+
+## 0.7.8
+
+### Patch Changes
+
+- 79e3caa: chore: replace petstore example with galaxy example
+
+## 0.7.7
+
+### Patch Changes
+
+- 624604e: style: adjust some icon sizes and allow overwriting classes
+- Updated dependencies [624604e]
+  - @scalar/oas-utils@0.1.11
+
+## 0.7.6
+
+### Patch Changes
+
+- 6e67167: feat: added more icons to components package
+
+## 0.7.5
+
+### Patch Changes
+
+- 836869b: feat: add icons from Scalar Docs
+
+## 0.7.4
+
+### Patch Changes
+
+- 26d9146: feat: improved api client modal
+
+## 0.7.3
+
+### Patch Changes
+
+- 45dc04b: fix: can’t release packages
+- Updated dependencies [45dc04b]
+  - @scalar/oas-utils@0.1.10
+
+## 0.7.2
+
+### Patch Changes
+
+- 05e2e27: chore: add provenance statement
+- Updated dependencies [05e2e27]
+  - @scalar/oas-utils@0.1.9
+
+## 0.7.1
+
+### Patch Changes
+
+- Updated dependencies [085a0c2]
+- Updated dependencies [fa10d45]
+  - @scalar/oas-utils@0.1.8
+
+## 0.7.0
+
+### Minor Changes
+
+- 1c18f77: feat: add scalar popover
+
+### Patch Changes
+
+- c68939c: feat: allow toggling of password fields
+- 07211ad: chore: added new lint rule for type importing for better perf
+- 830b3c8: fix: remove ts extension from tailwind export
+- Updated dependencies [07211ad]
+  - @scalar/oas-utils@0.1.7
+
+## 0.6.1
+
+### Patch Changes
+
+- 2706d57: chore: update tailwind export to include commonjs
+
+## 0.6.0
+
+### Minor Changes
+
+- fc2c90f: feat: cleanup component library icons
+
+## 0.5.5
+
+### Patch Changes
+
+- 2700c5c: feat: separate google fonts from theme, add withDefaultFonts setting
+
+## 0.5.4
+
+### Patch Changes
+
+- 79485ff: fix: scalar package icon types
+- 92b5b2a: fix: truncate search results properly
+
+## 0.5.3
+
+### Patch Changes
+
+- bc3f3af: build: add icons to scalar components package
+
+## 0.5.2
+
+### Patch Changes
+
+- e8ef57e: chore: export tailwind config as ts
+- 1353154: fix: circular references in code blocks throw errors
+
+## 0.5.1
+
+### Patch Changes
+
+- 24662c3: feat: rebuild search modal
+
+## 0.5.0
+
+### Minor Changes
+
+- 0e64a36: refactor: rename all --theme-_ variables to --scalar-_
+
+### Patch Changes
+
+- 22f2858: chore: ran syncpack to update packages
+- Updated dependencies [22f2858]
+  - @scalar/oas-utils@0.1.6
+
+## 0.4.11
+
+### Patch Changes
+
+- 3ba9774: feat: add better SSR support to ScalarCodeBlock
+- Updated dependencies [3ba9774]
+  - @scalar/oas-utils@0.1.5
+
+## 0.4.10
+
+### Patch Changes
+
+- 95bac72: fix: docusaurus code blocks
+
+## 0.4.9
+
+### Patch Changes
+
+- c14568f: feat: add custom security option
+
+## 0.4.8
+
+### Patch Changes
+
+- ae193a8: feat: sidebar border indents + theme polish
+
+## 0.4.7
+
+### Patch Changes
+
+- f861efa: chore: changed svg rendering strategy
+
+## 0.4.6
+
+### Patch Changes
+
+- 7d0092e: fix: show schema selector
+
+## 0.4.5
+
+### Patch Changes
+
+- 42b385b: fix: make ScalarCodeBlock SSR/SSG compatible
+
+## 0.4.4
+
+### Patch Changes
+
+- bbbba1f: fix: cjs export of components
+
+## 0.4.3
+
+### Patch Changes
+
+- ddc9b17: fix: re-added moving the components css into js so importing the css file is no longer needed
+- 775646a: fix: removed extra copy of vue from themes and some dependencies
+- ef3a015: chore: update to typescript 5.4
+
+## 0.4.2
+
+### Patch Changes
+
+- 3b672cc: fix: revert css changes to components lib
+
+## 0.4.1
+
+### Patch Changes
+
+- c5e8b13: feat: hide secret credentials
+
+## 0.4.0
+
+### Minor Changes
+
+- 407a3af: style: removed css file from components (breaking change)
+
+### Patch Changes
+
+- 5bc2ebf: Add syntax highlighting back to codemirror
+
+## 0.3.0
+
+### Minor Changes
+
+- 6857b8d: fix: api client syntax highlighting
+
+## 0.2.6
+
+### Patch Changes
+
+- c103201: fix: polish sidebar
+
+## 0.2.5
+
+### Patch Changes
+
+- 1669b27: chore: update dependencies
+
+## 0.2.4
+
+### Patch Changes
+
+- c6b95ca: chore: upgrade from Vite 4 to Vite 5
+
+## 0.2.3
+
+### Patch Changes
+
+- 92a8b9f: chore: update dependencies
+
+## 0.2.2
+
+### Patch Changes
+
+- 81543f42: chore: add support for Node 18
+
+## 0.2.1
+
+### Patch Changes
+
+- 6d777194: feat: release themes
+
+## 0.2.0
+
+### Minor Changes
+
+- 1c4f4c88: feat: classic layout polish
+
+### Patch Changes
+
+- 2d7e3e6e: chore: prefix all CSS classes
+
+## 0.1.0
+
+### Minor Changes
+
+- a1319e8b: Switched internal component library to use ScalarComponents instead
+
+## 0.0.5
+
+### Patch Changes
+
+- e0354c9: style: moved some tailwind properties to extend for more options
+
+## 0.0.4
+
+### Patch Changes
+
+- 35dffe4: chore: include @scalar dependencies in the bundle
+
+## 0.0.3
+
+### Patch Changes
+
+- c3b215f: chore: no pinned peer dependency versions
+
+## 0.0.2
+
+### Patch Changes
+
+- 55246e5: chore: rewrite all package.jsons (including their prod, dev and peer dependency requirements)
