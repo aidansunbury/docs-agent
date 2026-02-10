@@ -14,3 +14,7 @@
 	path = resources/better-auth
 	url = https://github.com/better-auth/better-auth.git
 	branch = canary
+[submodule "resources/scalar"]
+	path = resources/scalar
+	url = https://github.com/scalar/scalar.git
+	branch = main
