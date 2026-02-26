@@ -18,3 +18,7 @@
 	path = resources/scalar
 	url = https://github.com/scalar/scalar.git
 	branch = main
+[submodule "resources/hyprwhspr"]
+	path = resources/hyprwhspr
+	url = https://github.com/goodroot/hyprwhspr.git
+	branch = main
