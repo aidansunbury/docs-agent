@@ -1,0 +1,108 @@
+#!/bin/bash
+
+# hyprwhspr launcher
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname $(readlink -f "$0"))" && pwd)"
+PACKAGE_ROOT="$(dirname "$SCRIPT_DIR")"
+
+# Determine the library directory
+# Development: lib/cli.py exists directly under PACKAGE_ROOT
+# Installed: lib/hyprwhspr/cli.py under PACKAGE_ROOT (e.g., ~/.local/lib/hyprwhspr/)
+if [ -f "$PACKAGE_ROOT/lib/cli.py" ]; then
+    LIB_DIR="$PACKAGE_ROOT/lib"
+elif [ -f "$PACKAGE_ROOT/lib/hyprwhspr/cli.py" ]; then
+    LIB_DIR="$PACKAGE_ROOT/lib/hyprwhspr"
+else
+    echo "Error: Cannot find hyprwhspr library files." >&2
+    echo "Searched in:" >&2
+    echo "  $PACKAGE_ROOT/lib/cli.py" >&2
+    echo "  $PACKAGE_ROOT/lib/hyprwhspr/cli.py" >&2
+    exit 1
+fi
+
+# Set environment variables
+export HYPRWHSPR_ROOT="$PACKAGE_ROOT"
+export PYTHONPATH="$LIB_DIR:$PYTHONPATH"
+
+# Find system Python, avoiding mise/pyenv/asdf/homebrew managed versions
+# CLI commands use system Python since deps are installed via package manager
+get_system_python() {
+    # Use a clean PATH containing only system directories to find Python
+    # This excludes version managers, homebrew, and user-installed Pythons
+    # Prefer /usr/bin first since that's where distro packages install Python
+    local system_path="/usr/bin:/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"
+    local py
+
+    # Search for python3 or python in system paths only
+    py="$(PATH="$system_path" command -v python3 2>/dev/null)" && [ -x "$py" ] && { echo "$py"; return 0; }
+    py="$(PATH="$system_path" command -v python 2>/dev/null)" && [ -x "$py" ] && { echo "$py"; return 0; }
+
+    # No system Python found
+    return 1
+}
+
+# Always use system Python for CLI commands
+# Dependencies (python-rich, etc.) are installed via package manager to system site-packages
+# This avoids issues with mise/pyenv/asdf hijacking python3 to a version without those deps
+CLI_PYTHON="$(get_system_python)"
+if [[ -z "$CLI_PYTHON" ]]; then
+    echo "Error: System Python not found." >&2
+    echo "hyprwhspr requires system Python with distro packages (python-rich, etc.)." >&2
+    echo "Please install Python via your package manager (pacman -S python)." >&2
+    exit 1
+fi
+
+# Find venv Python (for main app execution)
+VENV_PYTHON="${XDG_DATA_HOME:-$HOME/.local/share}/hyprwhspr/venv/bin/python"
+if [ -f "$VENV_PYTHON" ]; then
+    PYTHON_CMD="$VENV_PYTHON"
+else
+    # Fallback to system Python if venv doesn't exist
+    PYTHON_CMD="$CLI_PYTHON"
+fi
+
+# Help handling: route any -h/--help or leading "help" to CLI help
+for arg in "$@"; do
+  if [[ "$arg" == "-h" || "$arg" == "--help" ]]; then
+    exec "$CLI_PYTHON" "$LIB_DIR/cli.py" --help
+  fi
+done
+
+if [[ "$1" == "help" ]]; then
+  exec "$CLI_PYTHON" "$LIB_DIR/cli.py" --help
+fi
+
+# Subcommands: route to CLI if recognized
+# 'test' needs venv Python since it loads the transcription backend
+if [[ "$1" == "test" ]]; then
+  exec "$PYTHON_CMD" "$LIB_DIR/cli.py" "$@"
+fi
+if [[ "$1" =~ ^(setup|install|config|waybar|systemd|status|model|validate|uninstall|backend|state|mic-osd|keyboard|record)$ ]]; then
+  exec "$CLI_PYTHON" "$LIB_DIR/cli.py" "$@"
+fi
+
+# Set up CUDA library path if CUDA is installed
+if [ -d "/opt/cuda" ]; then
+  CUDA_LIB_DIRS=""
+  [ -d "/opt/cuda/lib" ] && CUDA_LIB_DIRS="/opt/cuda/lib"
+  [ -d "/opt/cuda/lib64" ] && CUDA_LIB_DIRS="${CUDA_LIB_DIRS:+$CUDA_LIB_DIRS:}/opt/cuda/lib64"
+  
+  if [ -n "$CUDA_LIB_DIRS" ]; then
+    export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}${CUDA_LIB_DIRS}"
+  fi
+fi
+
+# Set up ROCm library path if ROCm is installed
+if [ -d "/opt/rocm" ]; then
+  ROCM_LIB_DIRS=""
+  [ -d "/opt/rocm/lib" ] && ROCM_LIB_DIRS="/opt/rocm/lib"
+  [ -d "/opt/rocm/lib64" ] && ROCM_LIB_DIRS="${ROCM_LIB_DIRS:+$ROCM_LIB_DIRS:}/opt/rocm/lib64"
+  
+  if [ -n "$ROCM_LIB_DIRS" ]; then
+    export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}${ROCM_LIB_DIRS}"
+  fi
+fi
+
+# Default: run main application with venv Python
+exec "$PYTHON_CMD" "$LIB_DIR/main.py" "$@"

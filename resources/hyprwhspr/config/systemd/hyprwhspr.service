@@ -1,0 +1,28 @@
+[Unit]
+Description=hyprwhspr stt
+Documentation=https://github.com/goodroot/hyprwhspr
+
+PartOf=graphical-session.target
+After=graphical-session.target
+
+After=pipewire.service ydotool.service
+Wants=pipewire.service
+Requires=ydotool.service
+
+Wants=wireplumber.service
+After=wireplumber.service
+
+[Service]
+Type=simple
+ExecStartPre=/bin/bash -lc 'for i in $(seq 1 60); do ls "$XDG_RUNTIME_DIR"/wayland-* >/dev/null 2>&1 && exit 0; sleep 0.25; done; echo "Wayland socket not found"; exit 1'
+ExecStart=/usr/lib/hyprwhspr/bin/hyprwhspr
+ExecStopPost=/bin/bash -c 'pkill -9 -f "hyprwhspr-virtual-keyboard" 2>/dev/null || true'
+Environment=HYPRWHSPR_ROOT=/usr/lib/hyprwhspr
+Environment=PYTHONUNBUFFERED=1
+Restart=on-failure
+RestartSec=2
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=graphical-session.target
